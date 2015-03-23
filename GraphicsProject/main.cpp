@@ -4,7 +4,7 @@
 //
 //  Created by Natalie Agus on 23/3/15.
 //  Copyright (c) 2015 Natalie Agus. All rights reserved.
-//
+//  Uploaded on GitHub
 
 #include <iostream>
 
