@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEE3531ABFD9A20032C8DB /* main.cpp */; };
+		FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */; };
+		FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */; };
+		FDF0A7B31AC2CAF700C74A38 /* Matrix3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AC1AC2CAF700C74A38 /* Matrix3f.cpp */; };
+		FDF0A7B41AC2CAF700C74A38 /* Matrix4f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AD1AC2CAF700C74A38 /* Matrix4f.cpp */; };
+		FDF0A7B51AC2CAF700C74A38 /* Quat4f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AE1AC2CAF700C74A38 /* Quat4f.cpp */; };
+		FDF0A7B61AC2CAF700C74A38 /* Vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AF1AC2CAF700C74A38 /* Vector2f.cpp */; };
+		FDF0A7B71AC2CAF700C74A38 /* Vector3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7B01AC2CAF700C74A38 /* Vector3f.cpp */; };
+		FDF0A7B81AC2CAF700C74A38 /* Vector4f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7B11AC2CAF700C74A38 /* Vector4f.cpp */; };
+		FDF0A7BB1AC2CF8800C74A38 /* SolarSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +34,25 @@
 /* Begin PBXFileReference section */
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
+		FDF0A79E1AC2CA7100C74A38 /* Planet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planet.h; sourceTree = "<group>"; };
+		FDF0A7A21AC2CAF700C74A38 /* Matrix2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2f.h; sourceTree = "<group>"; };
+		FDF0A7A31AC2CAF700C74A38 /* Matrix3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3f.h; sourceTree = "<group>"; };
+		FDF0A7A41AC2CAF700C74A38 /* Matrix4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4f.h; sourceTree = "<group>"; };
+		FDF0A7A51AC2CAF700C74A38 /* Quat4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quat4f.h; sourceTree = "<group>"; };
+		FDF0A7A61AC2CAF700C74A38 /* vecmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vecmath.h; sourceTree = "<group>"; };
+		FDF0A7A71AC2CAF700C74A38 /* Vector2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2f.h; sourceTree = "<group>"; };
+		FDF0A7A81AC2CAF700C74A38 /* Vector3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3f.h; sourceTree = "<group>"; };
+		FDF0A7A91AC2CAF700C74A38 /* Vector4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4f.h; sourceTree = "<group>"; };
+		FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix2f.cpp; sourceTree = "<group>"; };
+		FDF0A7AC1AC2CAF700C74A38 /* Matrix3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix3f.cpp; sourceTree = "<group>"; };
+		FDF0A7AD1AC2CAF700C74A38 /* Matrix4f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix4f.cpp; sourceTree = "<group>"; };
+		FDF0A7AE1AC2CAF700C74A38 /* Quat4f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quat4f.cpp; sourceTree = "<group>"; };
+		FDF0A7AF1AC2CAF700C74A38 /* Vector2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2f.cpp; sourceTree = "<group>"; };
+		FDF0A7B01AC2CAF700C74A38 /* Vector3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3f.cpp; sourceTree = "<group>"; };
+		FDF0A7B11AC2CAF700C74A38 /* Vector4f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector4f.cpp; sourceTree = "<group>"; };
+		FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarSystem.cpp; sourceTree = "<group>"; };
+		FDF0A7BA1AC2CF8800C74A38 /* SolarSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolarSystem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +85,52 @@
 		2CBEE3521ABFD9A20032C8DB /* GraphicsProject */ = {
 			isa = PBXGroup;
 			children = (
+				FDF0A7A01AC2CAF700C74A38 /* vecmath */,
 				2CBEE3531ABFD9A20032C8DB /* main.cpp */,
+				FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */,
+				FDF0A79E1AC2CA7100C74A38 /* Planet.h */,
+				FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */,
+				FDF0A7BA1AC2CF8800C74A38 /* SolarSystem.h */,
 			);
 			path = GraphicsProject;
+			sourceTree = "<group>";
+		};
+		FDF0A7A01AC2CAF700C74A38 /* vecmath */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0A7A11AC2CAF700C74A38 /* include */,
+				FDF0A7AA1AC2CAF700C74A38 /* src */,
+			);
+			path = vecmath;
+			sourceTree = "<group>";
+		};
+		FDF0A7A11AC2CAF700C74A38 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0A7A21AC2CAF700C74A38 /* Matrix2f.h */,
+				FDF0A7A31AC2CAF700C74A38 /* Matrix3f.h */,
+				FDF0A7A41AC2CAF700C74A38 /* Matrix4f.h */,
+				FDF0A7A51AC2CAF700C74A38 /* Quat4f.h */,
+				FDF0A7A61AC2CAF700C74A38 /* vecmath.h */,
+				FDF0A7A71AC2CAF700C74A38 /* Vector2f.h */,
+				FDF0A7A81AC2CAF700C74A38 /* Vector3f.h */,
+				FDF0A7A91AC2CAF700C74A38 /* Vector4f.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDF0A7AA1AC2CAF700C74A38 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */,
+				FDF0A7AC1AC2CAF700C74A38 /* Matrix3f.cpp */,
+				FDF0A7AD1AC2CAF700C74A38 /* Matrix4f.cpp */,
+				FDF0A7AE1AC2CAF700C74A38 /* Quat4f.cpp */,
+				FDF0A7AF1AC2CAF700C74A38 /* Vector2f.cpp */,
+				FDF0A7B01AC2CAF700C74A38 /* Vector3f.cpp */,
+				FDF0A7B11AC2CAF700C74A38 /* Vector4f.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +189,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */,
+				FDF0A7B71AC2CAF700C74A38 /* Vector3f.cpp in Sources */,
+				FDF0A7BB1AC2CF8800C74A38 /* SolarSystem.cpp in Sources */,
 				2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */,
+				FDF0A7B51AC2CAF700C74A38 /* Quat4f.cpp in Sources */,
+				FDF0A7B41AC2CAF700C74A38 /* Matrix4f.cpp in Sources */,
+				FDF0A7B61AC2CAF700C74A38 /* Vector2f.cpp in Sources */,
+				FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */,
+				FDF0A7B31AC2CAF700C74A38 /* Matrix3f.cpp in Sources */,
+				FDF0A7B81AC2CAF700C74A38 /* Vector4f.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +312,7 @@
 				2CBEE3591ABFD9A20032C8DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

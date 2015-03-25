@@ -7,14 +7,24 @@
 //  Uploaded on GitHub
 
 #include <iostream>
+#include "SolarSystem.h"
+#include "Planet.h"
+using namespace std;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    cout << "Hello, World!\n";
     
     //hello natalie
     
-    std::cout<<"Graphics is fun"<<std::endl;
+    cout<<"Graphics is fun"<<endl;
     //on crystal branch
+    
+    SolarSystem solSys;
+    
+    solSys.toString();
+    
+    
+    
     return 0;
 }
