@@ -13,5 +13,8 @@ int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n";
     
     //hello natalie
+    
+    std::cout<<"Graphics is fun"<<std::endl;
+    //on crystal branch
     return 0;
 }
