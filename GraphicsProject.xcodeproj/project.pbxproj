@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C408F601ACC1E5C0045BA78 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F5F1ACC1E5C0045BA78 /* OpenGL.framework */; };
+		2C408F621ACC1E600045BA78 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F611ACC1E600045BA78 /* GLUT.framework */; };
+		2C408F641ACC1E650045BA78 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F631ACC1E650045BA78 /* Cocoa.framework */; };
+		2C408F671ACC21800045BA78 /* imageloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F651ACC21800045BA78 /* imageloader.cpp */; };
 		2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEE3531ABFD9A20032C8DB /* main.cpp */; };
 		FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */; };
 		FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */; };
@@ -32,6 +36,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C408F5F1ACC1E5C0045BA78 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		2C408F611ACC1E600045BA78 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		2C408F631ACC1E650045BA78 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2C408F651ACC21800045BA78 /* imageloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imageloader.cpp; sourceTree = "<group>"; };
+		2C408F661ACC21800045BA78 /* imageloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageloader.h; sourceTree = "<group>"; };
+		2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Startup_screen.bmp; sourceTree = "<group>"; };
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
@@ -60,6 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C408F641ACC1E650045BA78 /* Cocoa.framework in Frameworks */,
+				2C408F621ACC1E600045BA78 /* GLUT.framework in Frameworks */,
+				2C408F601ACC1E5C0045BA78 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +82,9 @@
 		2CBEE3471ABFD9A20032C8DB = {
 			isa = PBXGroup;
 			children = (
+				2C408F631ACC1E650045BA78 /* Cocoa.framework */,
+				2C408F611ACC1E600045BA78 /* GLUT.framework */,
+				2C408F5F1ACC1E5C0045BA78 /* OpenGL.framework */,
 				2CBEE3521ABFD9A20032C8DB /* GraphicsProject */,
 				2CBEE3511ABFD9A20032C8DB /* Products */,
 			);
@@ -87,8 +103,11 @@
 			children = (
 				FDF0A7A01AC2CAF700C74A38 /* vecmath */,
 				2CBEE3531ABFD9A20032C8DB /* main.cpp */,
+				2C408F651ACC21800045BA78 /* imageloader.cpp */,
+				2C408F661ACC21800045BA78 /* imageloader.h */,
 				FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */,
 				FDF0A79E1AC2CA7100C74A38 /* Planet.h */,
+				2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */,
 				FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */,
 				FDF0A7BA1AC2CF8800C74A38 /* SolarSystem.h */,
 			);
@@ -198,6 +217,7 @@
 				FDF0A7B61AC2CAF700C74A38 /* Vector2f.cpp in Sources */,
 				FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */,
 				FDF0A7B31AC2CAF700C74A38 /* Matrix3f.cpp in Sources */,
+				2C408F671ACC21800045BA78 /* imageloader.cpp in Sources */,
 				FDF0A7B81AC2CAF700C74A38 /* Vector4f.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
