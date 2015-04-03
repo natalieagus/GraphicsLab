@@ -20,12 +20,10 @@ class Planet{
 
 public:
     
-    Planet( string name, float r, float m, float ang_v);
-    
-    vector<Vector3f> evalF(vector<Vector3f> state);
+    Planet( string name, float R, float r, float m, float ang_v);
     float getRadius();
+    float getDist();
     float getMass();
-    vector<Vector3f> getState();
     void draw();
     void toString();
     
@@ -35,8 +33,8 @@ private:
 
     float r;    //radius of Planet
     float m;    //mass of Planet
-    vector<Vector3f> state; //x and v of planet
     float ang_v;    //angular velocity
+    float R;    //distance from sun
     string name;
     
 };

@@ -15,28 +15,18 @@
 
 using namespace std;
     
-Planet::Planet(string name, float r, float m, float ang_v){
+Planet::Planet(string name, float R, float r, float m, float ang_v){
     this->r = r;
+    this->R = R;
     this->m = m;
     this->ang_v = ang_v;
     this->name = name;
     
-    vector<Vector3f> s;
-    s.push_back(Vector3f(0,0,0));
-    s.push_back(Vector3f(0,0,0));
-    
-    this->state =s;
-    
 }
+
+float Planet::getDist(){
     
-vector<Vector3f> Planet::evalF(vector<Vector3f> state){
-    
-    vector<Vector3f> eval;
-    
-    //add code here to eval fx_t;
-    
-    return eval;
-    
+    return this->R;
 }
 
 float Planet::getRadius(){
@@ -48,10 +38,6 @@ float Planet::getMass(){
     
     return this->m;
     
-}
-vector<Vector3f> Planet::getState(){
-
-    return this->state;
 }
 
 void Planet::toString(){
