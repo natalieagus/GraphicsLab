@@ -14,7 +14,6 @@
 #include <OpenGL/gl.h>
 #include "ImageLoad.h"
 #include <cmath>
-#include <iostream>
 #include <sstream>
 #include <vector>
 #include "vecmath.h"
@@ -95,16 +94,26 @@ void update(int value) {
 int main(int argc, char * argv[]) {
     glutInit(&argc, argv);
     
-    // insert code here...
-    cout << "Hello, World!\n";
+
+    char* dataFile;
+    for (int argNum=1;argNum<argc; ++argNum){
+        
+     //read command line args
+        cout<<argNum<<": "<<argv[argNum]<<endl;
+        
+        if (strcmp(argv[argNum], "-data")==0){
+            
+            dataFile = (char*) argv[argNum+1];
+            cout<<"dataFile: "<<dataFile<<endl;
+            
+            //Specify data file with -data [dataFilePath]
+        }
+        
+    }
     
-    //hello natalie
     
-    cout<<"Graphics is fun"<<endl;
-    //on crystal branch
-    
-    SolarSystem solSys;
-    
+    //SolarSystem solSys;
+    SolarSystem solSys(dataFile);
     solSys.toString();
     char ** argt;
     

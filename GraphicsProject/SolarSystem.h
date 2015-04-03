@@ -20,10 +20,9 @@ class SolarSystem{
     
 public:
     
-    SolarSystem();
+    SolarSystem(char*);
     void draw();
     void toString();
-    void parseCSV(char*);
     vector<Vector3f>evalF();
     vector<Planet> planets;
     vector<Vector3f> state;

@@ -44,6 +44,8 @@
 		2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoad.h; sourceTree = "<group>"; };
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FD788ACE1ACEDE1100535097 /* sunEarthData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sunEarthData.csv; sourceTree = "<group>"; };
+		FD788ACF1ACEE61500535097 /* fullPlanetData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fullPlanetData.csv; sourceTree = "<group>"; };
 		FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
 		FDF0A79E1AC2CA7100C74A38 /* Planet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planet.h; sourceTree = "<group>"; };
 		FDF0A7A21AC2CAF700C74A38 /* Matrix2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2f.h; sourceTree = "<group>"; };
@@ -101,6 +103,8 @@
 		2CBEE3521ABFD9A20032C8DB /* GraphicsProject */ = {
 			isa = PBXGroup;
 			children = (
+				FD788ACF1ACEE61500535097 /* fullPlanetData.csv */,
+				FD788ACE1ACEDE1100535097 /* sunEarthData.csv */,
 				FDF0A7A01AC2CAF700C74A38 /* vecmath */,
 				2CBEE3531ABFD9A20032C8DB /* main.cpp */,
 				2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */,
