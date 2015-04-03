@@ -12,7 +12,7 @@
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 #include <OpenGL/gl.h>
-#include "imageloader.h"
+#include "ImageLoad.h"
 #include <cmath>
 #include <iostream>
 #include <sstream>
