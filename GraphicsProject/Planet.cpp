@@ -15,7 +15,7 @@
 
 using namespace std;
     
-Planet::Planet(string name, float R, float r, float m, float ang_v){
+Planet::Planet(string name, double R, double r, double m, double ang_v){
     this->r = r;
     this->R = R;
     this->m = m;
@@ -24,17 +24,17 @@ Planet::Planet(string name, float R, float r, float m, float ang_v){
     
 }
 
-float Planet::getDist(){
+double Planet::getDist(){
     
     return this->R;
 }
 
-float Planet::getRadius(){
+double Planet::getRadius(){
     
     return this->r;
 }
 
-float Planet::getMass(){
+double Planet::getMass(){
     
     return this->m;
     

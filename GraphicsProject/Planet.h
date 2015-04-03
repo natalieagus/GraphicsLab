@@ -20,10 +20,10 @@ class Planet{
 
 public:
     
-    Planet( string name, float R, float r, float m, float ang_v);
-    float getRadius();
-    float getDist();
-    float getMass();
+    Planet( string name, double R, double r, double m, double ang_v);
+    double getRadius();
+    double getDist();
+    double getMass();
     void draw();
     void toString();
     
@@ -31,10 +31,10 @@ public:
     
 private:
 
-    float r;    //radius of Planet
-    float m;    //mass of Planet
-    float ang_v;    //angular velocity
-    float R;    //distance from sun
+    double r;    //radius of Planet
+    double m;    //mass of Planet
+    double ang_v;    //angular velocity
+    double R;    //distance from sun
     string name;
     
 };

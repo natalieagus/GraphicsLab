@@ -10,20 +10,61 @@
 #include "Planet.h"
 #include <string>
 #include <cmath>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <istream>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 #define GRAV_C 6.67*pow(10,-11)
 
+using namespace std;
 
-SolarSystem::SolarSystem(){
 
-    //initialise Solar System here
-    Planet earth("earth", 1.0, 1.0, 1.0, 1.0);
-    this->planets.push_back(earth);
+SolarSystem::SolarSystem(char* filePath){
+    
+    //read and parse file
     
     vector<Vector3f> pos,vel;
-    pos.push_back(Vector3f(earth.getDist(),0,0));
-    vel.push_back(Vector3f(0,0,0));
+    cout<<"filePath: "<<filePath<<endl;
     
+    FILE *fp = fopen(filePath,"r");
+    //FILE *fp = fopen("sunEarthData.csv","r");
+    char line[1024];
+    
+    if(fp == NULL){
+        cerr<<"Failed to open file"<<endl;
+    }
+    else{
+    
+        
+        while(fgets(line,1024,fp)){
+            cout<<line<<endl;
+            char* tok;
+            vector<char*> toks;
+            
+            
+            tok = strtok(line,",");
+            
+            while (tok != NULL)
+            {
+                printf ("%s\n",tok);
+                toks.push_back(tok);
+                tok = strtok (NULL, ",");
+            }
+            Planet p(toks[0],stod(toks[1]),stod(toks[2]),stod(toks[3]),stod(toks[4]));
+            this->planets.push_back(p);
+            vector<Vector3f> pos,vel;
+            pos.push_back(Vector3f(p.getDist(),0,0));
+            vel.push_back(Vector3f(0,0,0));
+            
+            
+        }
+    }
+    
+    //initialise Solar System here
     
     this->state.insert(this->state.end(), pos.begin(),pos.end());
     this->state.insert(this->state.end(), vel.begin(),vel.end());
@@ -33,10 +74,6 @@ SolarSystem::SolarSystem(){
     //keep states as x1,x2,x3,x4...,v1,v2,v3,v4...
     
 };
-
-void SolarSystem::parseCSV(char* filepath){
-    
-}
 
 void SolarSystem::draw(){
     
