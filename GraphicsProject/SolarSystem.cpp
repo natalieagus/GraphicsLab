@@ -81,11 +81,11 @@ void SolarSystem::draw(){
     
 };
 
-vector<Vector3f> SolarSystem::evalF(){
+vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
     
     vector<Vector3f> acc;
-    vector<Vector3f> pos(this->state.begin(),this->state.begin()+this->sysSize);
-    vector<Vector3f> vel(this->state.begin()+this->sysSize,this->state.end());
+    vector<Vector3f> pos(state.begin(),state.begin()+this->sysSize);
+    vector<Vector3f> vel(state.begin()+this->sysSize,state.end());
   
     for(int i=0; i<this->sysSize;i++){
         
