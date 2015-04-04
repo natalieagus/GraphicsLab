@@ -26,6 +26,9 @@
 using namespace std;
 int screenWidth, screenHeight;
 SolarSystem* SolSys;
+TimeStepper* timestepper;
+float stepSize;
+
 float distBuffer = -20;
 const float SIZE = 10.0f;
 #define M_PI    (3.14159265)
@@ -33,6 +36,13 @@ GLUquadricObj *sphere = NULL;
 float _angle = 0;
 GLuint texId;
 
+void initialize(char* dataFile){
+    SolSys = new SolarSystem(dataFile);
+    cout <<"solarsystemsetup"<<endl;
+    timestepper = new RK4();
+    stepSize = 0.04;
+    
+}
 void initRendering() {
     glEnable(GL_DEPTH_TEST);
 
@@ -156,6 +166,18 @@ void drawScene() {
     glutSwapBuffers();
     
 }
+void stepSystem()
+{
+    ///TODO The stepsize should change according to commandline arguments
+    
+    //if using RK45 then stepsize should change according to the timestepper's timestep
+    
+    //cout << "Printing" << endl;
+    if (timestepper != 0){
+        timestepper->takeStep(SolSys, stepSize);
+    }
+    
+}
 
 void update(int value) {
     _angle += 1.5f;
@@ -167,7 +189,8 @@ void update(int value) {
     }
     
     
-    
+    stepSystem();
+
     glutPostRedisplay();
     
     glutTimerFunc(25, update, 0);
@@ -195,10 +218,9 @@ int main(int argc, char * argv[]) {
         
     }
     
-    
     //SolarSystem solSys;
-    SolSys = new SolarSystem(dataFile);
-    cout <<"solarsystemsetup"<<endl;
+    initialize(dataFile);
+ 
     
     
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);

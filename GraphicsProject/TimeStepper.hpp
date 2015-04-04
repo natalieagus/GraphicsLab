@@ -8,14 +8,14 @@
 class TimeStepper
 {
 public:
-	virtual void takeStep(SolarSystem* particleSystem,float stepSize)=0;
+	virtual void takeStep(SolarSystem* solarSystem,float stepSize)=0;
     static float updatedStepsize;
 };
 
 class RK4:public TimeStepper
 {
 
-  void takeStep(SolarSystem* particleSystem, float stepSize);
+  void takeStep(SolarSystem* solarSystem, float stepSize);
 };
 
 #endif
