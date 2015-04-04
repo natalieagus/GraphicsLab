@@ -30,7 +30,7 @@ public:
     
     static Image* loadBMP(const char* filename) ;
     static GLuint loadTextureFromImage(Image* image);
-    //Converts a four-character array to an integer, using little-endian form
+  
     
 };
 #endif /* defined(__GraphicsProject__ImageLoad__) */

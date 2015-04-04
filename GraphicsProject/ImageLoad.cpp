@@ -18,21 +18,6 @@ Image::Image() {
     
 }
 
-namespace{
-    int toInt(const char* bytes) {
-        return (int)(((unsigned char)bytes[3] << 24) |
-                     ((unsigned char)bytes[2] << 16) |
-                     ((unsigned char)bytes[1] << 8) |
-                     (unsigned char)bytes[0]);
-    }
-    
-    
-    int readInt(ifstream &input) {
-        char buffer[4];
-        input.read(buffer, 4);
-        return toInt(buffer);
-    }
-}
 
 
 Image* Image::loadBMP(const char* FilePath) {
@@ -80,7 +65,7 @@ Image* Image::loadBMP(const char* FilePath) {
 
 GLuint Image::loadTextureFromImage(Image* image) {
     GLuint textureId;
-    glGenTextures(1, &textureId); //Make room for our texture
+    glGenTextures(1, &textureId); //Make room for texture
     glBindTexture(GL_TEXTURE_2D, textureId);
     //Map the image to the texture
     glTexImage2D(GL_TEXTURE_2D,

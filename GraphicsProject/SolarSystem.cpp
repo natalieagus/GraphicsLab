@@ -22,7 +22,9 @@
 
 using namespace std;
 
-
+SolarSystem::SolarSystem(){
+    
+}
 SolarSystem::SolarSystem(char* filePath){
     
     //read and parse file
@@ -41,7 +43,7 @@ SolarSystem::SolarSystem(char* filePath){
     
         
         while(fgets(line,1024,fp)){
-            cout<<line<<endl;
+           // cout<<line<<endl;
             char* tok;
             vector<char*> toks;
             
@@ -50,7 +52,7 @@ SolarSystem::SolarSystem(char* filePath){
             
             while (tok != NULL)
             {
-                printf ("%s\n",tok);
+               // printf ("%s\n",tok);
                 toks.push_back(tok);
                 tok = strtok (NULL, ",");
             }

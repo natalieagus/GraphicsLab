@@ -11,6 +11,7 @@
 		2C408F621ACC1E600045BA78 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F611ACC1E600045BA78 /* GLUT.framework */; };
 		2C408F641ACC1E650045BA78 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F631ACC1E650045BA78 /* Cocoa.framework */; };
 		2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */; };
+		2C408F881ACF7D9A0045BA78 /* TimeStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */; };
 		2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEE3531ABFD9A20032C8DB /* main.cpp */; };
 		FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */; };
 		FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */; };
@@ -42,6 +43,8 @@
 		2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Startup_screen.bmp; sourceTree = "<group>"; };
 		2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoad.cpp; sourceTree = "<group>"; };
 		2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoad.h; sourceTree = "<group>"; };
+		2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStepper.cpp; sourceTree = "<group>"; };
+		2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeStepper.hpp; sourceTree = "<group>"; };
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FD788ACE1ACEDE1100535097 /* sunEarthData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sunEarthData.csv; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */,
 				2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */,
 				FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */,
+				2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */,
+				2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */,
 				FDF0A79E1AC2CA7100C74A38 /* Planet.h */,
 				2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */,
 				FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */,
@@ -218,6 +223,7 @@
 				FDF0A7BB1AC2CF8800C74A38 /* SolarSystem.cpp in Sources */,
 				2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */,
 				FDF0A7B51AC2CAF700C74A38 /* Quat4f.cpp in Sources */,
+				2C408F881ACF7D9A0045BA78 /* TimeStepper.cpp in Sources */,
 				FDF0A7B41AC2CAF700C74A38 /* Matrix4f.cpp in Sources */,
 				FDF0A7B61AC2CAF700C74A38 /* Vector2f.cpp in Sources */,
 				FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */,

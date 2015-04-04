@@ -12,14 +12,12 @@
 #include <stdio.h>
 #include "Planet.h"
 
-#endif /* defined(__GraphicsProject__SolarSystem__) */
-
 
 
 class SolarSystem{
-    
+ 
 public:
-    
+    SolarSystem();
     SolarSystem(char*);
     void draw();
     void toString();
@@ -27,9 +25,15 @@ public:
     vector<Planet> planets;
     vector<Vector3f> state;
     int sysSize;    //no. of planets
+    vector<Vector3f> getState();
+    vector<Vector3f> evalF(vector<Vector3f> currentState);
+    void setState(vector<Vector3f> currentState);
     
 private:
 
     
     
 };
+
+
+#endif /* defined(__GraphicsProject__SolarSystem__) */
