@@ -25,7 +25,7 @@
 
 using namespace std;
 int screenWidth, screenHeight;
-SolarSystem SolSys;
+SolarSystem* SolSys;
 float distBuffer = -20;
 const float SIZE = 10.0f;
 #define M_PI    (3.14159265)
@@ -86,8 +86,8 @@ void handleResize(int w, int h) {
     glLoadIdentity();
     gluPerspective(100.0f, (float)screenWidth / (float)screenHeight, 0.001f, 500.0f);
    }
-void drawPlanets(SolarSystem solsys){
-    vector<Planet> p = solsys.planets;
+void drawPlanets(SolarSystem* solsys){
+    vector<Planet> p = solsys->planets;
     float drawDistance = 0;
     float prevRad = 0;
     for (int i = 0; i<p.size(); i++){
@@ -197,7 +197,7 @@ int main(int argc, char * argv[]) {
     
     
     //SolarSystem solSys;
-    SolSys = SolarSystem(dataFile);
+    SolSys = new SolarSystem(dataFile);
     cout <<"solarsystemsetup"<<endl;
     
     
