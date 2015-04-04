@@ -21,13 +21,13 @@ public:
     SolarSystem(char*);
     void draw();
     void toString();
-    vector<Vector3f>evalF(vector<Vector3f>);
     vector<Planet> planets;
     vector<Vector3f> state;
+    vector<Vector3f> oldstate;
     int sysSize;    //no. of planets
     vector<Vector3f> getState();
     vector<Vector3f> evalF(vector<Vector3f> currentState);
-    void setState(vector<Vector3f> currentState);
+    void setState(vector<Vector3f> nextState, vector<Vector3f> currentState);
     
 private:
 

@@ -40,7 +40,7 @@ void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
     cout <<"solarsystemsetup"<<endl;
     timestepper = new RK4();
-    stepSize = 0.04;
+    stepSize = 0.04f;
     
 }
 void initRendering() {
@@ -172,9 +172,12 @@ void stepSystem()
     
     //if using RK45 then stepsize should change according to the timestepper's timestep
     
-    //cout << "Printing" << endl;
-    if (timestepper != 0){
+    cout << "Printing" << endl;
+    if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
+        
+        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<
+        SolSys->getState()[1][2] <<endl;
     }
     
 }
@@ -193,7 +196,7 @@ void update(int value) {
 
     glutPostRedisplay();
     
-    glutTimerFunc(25, update, 0);
+    glutTimerFunc(20, update, 0);
     
 }
 
@@ -229,7 +232,7 @@ int main(int argc, char * argv[]) {
     initRendering();
     glutDisplayFunc(drawScene);
     glutReshapeFunc(handleResize);
-    glutTimerFunc(25, update, 0);
+    glutTimerFunc(20, update, 0);
     glutMainLoop();
 
     
