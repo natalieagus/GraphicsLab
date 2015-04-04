@@ -23,7 +23,7 @@ public:
     SolarSystem(char*);
     void draw();
     void toString();
-    vector<Vector3f>evalF();
+    vector<Vector3f>evalF(vector<Vector3f>);
     vector<Planet> planets;
     vector<Vector3f> state;
     int sysSize;    //no. of planets
