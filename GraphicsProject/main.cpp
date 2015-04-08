@@ -171,13 +171,12 @@ void stepSystem()
     ///TODO The stepsize should change according to commandline arguments
     
     //if using RK45 then stepsize should change according to the timestepper's timestep
-    
-    cout << "Printing" << endl;
     if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
         
-        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<
-        SolSys->getState()[1][2] <<endl;
+        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<endl;
+        cout << "Position of Second planet is now: " << SolSys->getState()[2][0] << " " <<SolSys->getState()[2][1]<< " " <<endl;
+        cout << "Position of Third planet is now: " << SolSys->getState()[3][0] << " " <<SolSys->getState()[3][1]<< " " <<endl;
     }
     
 }
