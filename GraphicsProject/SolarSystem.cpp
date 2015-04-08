@@ -18,7 +18,8 @@
 #include <stdlib.h>
 
 
-#define GRAV_C 6.67*pow(10,-11)
+//#define GRAV_C 6.67*pow(10,-11)
+#define GRAV_C 3.337*pow(10,-69)    //defined in AU^3 / (M_e *s^2)
 
 using namespace std;
 
