@@ -101,7 +101,7 @@ vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
                 float m = planets[j].getMass();
                 Vector3f dist = pos[j] - loc_i;
                 
-                float k = (GRAV_C * m) /pow(dist.abs(),3);
+                double k = ((double)GRAV_C * m) /pow(dist.abs(),3);
                 
                 a = a + (k * dist);     //sum up for all planets
                 
