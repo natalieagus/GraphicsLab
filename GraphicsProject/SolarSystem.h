@@ -24,10 +24,11 @@ public:
     vector<Planet> planets;
     vector<Vector3f> state;
     vector<Vector3f> oldstate;
+    double min_dist;
     int sysSize;    //no. of planets
-    vector<double> vel_factor;  //magnitude of velocities hehehe
     vector<Vector3f> getState();
     vector<Vector3f> evalF(vector<Vector3f> currentState);
+    vector<Vector3f> evalF2(vector<Vector3f> currentState);
     void setState(vector<Vector3f> nextState, vector<Vector3f> currentState);
     
 private:

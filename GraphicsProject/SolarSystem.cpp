@@ -35,6 +35,7 @@ SolarSystem::SolarSystem(char* filePath){
     //read and parse file
     
     vector<Vector3f> pos;
+    vector<double> all_dist;
     cout<<"filePath: "<<filePath<<endl;
     
     FILE *fp = fopen(filePath,"r");
@@ -65,6 +66,7 @@ SolarSystem::SolarSystem(char* filePath){
             Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]));
             this->planets.push_back(p);
             pos.push_back(Vector3f(p.getDist(),0,0));
+            all_dist.push_back(p.getDist());
             //vel.push_back(Vector3f(0,0,0));
             cout << "doing values" << pos.size() <<endl;
             
@@ -72,34 +74,13 @@ SolarSystem::SolarSystem(char* filePath){
         }
     }
     this->sysSize = planets.size();
-    
-    //calc init vel (pls work omg)
-    vel_factor.push_back(0);
-    
-    for(int i=1; i<this->sysSize;i++){
-        
-        double sum=0.0;
-        
-        for(int j=0; j<this->sysSize;j++){
-
-   
-            if (i==j){
-                continue;
-            }
-            else{
-                
-                //calculate v
-                
-                double dist = abs(planets[j].getDist() - planets[i].getDist()) * (double)AU;
-                
-                sum+=(planets[j].getMass()* (double) m_E /dist);
-                
-            }
-            
-        }
-        vel_factor.push_back(sqrt(sum*(double)GRAV_C)*SCALE_F);
-        
-    }
+    this->min_dist = *min_element(all_dist.begin(), all_dist.end());
+//    
+//    for(int n=0;n<sysSize;n++){
+//        
+//        planets[n].setDist(pow(planets[n].getDist()/min_dist,1.0/3));
+//        planets[n].setRadius(pow(planets[n].getRadius()/min_dist,1.0/3));
+//    }
     
     //initialise Solar System here
     this->state = pos;
@@ -169,7 +150,7 @@ void SolarSystem::draw(){
 //    return vel;
 //}
 
-vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
+vector<Vector3f> SolarSystem::evalF2(vector<Vector3f> state){
     
     vector<Vector3f> vel;
     vel.push_back(Vector3f(0,0,0)); //sun always 0
@@ -185,8 +166,60 @@ vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
         else{
             v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
                        }
-        vel.push_back(vel_factor[i]*v.normalized());
         
+        //vel.push_back(vel_factor[i]*v.normalized());
+        vel.push_back(v);
+        if(i==0){
+            
+            cout<<"Sun: "<<v[0]<<" "<<v[1]<<" "<<v[2]<<" ";
+            cout<<endl;
+        }
+        
+    }
+    
+    
+    return vel;
+}
+
+vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
+    
+    vector<Vector3f> vel;
+    vel.push_back(Vector3f(0,0,0)); //sun always 0
+    for(int i=1; i<sysSize;i++){
+        
+        Vector3f pos = state[i],v;
+        
+        //adjust for negative 0 because using double
+        if(pos.x()==0){
+            
+            v = Vector3f(pos.z(),pos.y(),pos.x());
+        }
+        else{
+            v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
+        }
+        
+        double sum=0.0;
+        
+        for(int j=0; j<this->sysSize;j++){
+            
+            
+            if (i==j){
+                continue;
+            }
+            else{
+                
+                //calculate v
+                
+                double dist = abs(planets[j].getDist() - planets[i].getDist())*1000;
+                
+                sum+=(planets[j].getMass()* (double) m_E /dist);
+                
+            }
+            
+        }
+        float k = sqrt(sum*(double)GRAV_C)*SCALE_F;
+        vel.push_back(k*v.normalized());
+        //vel.push_back(v);
         if(i==0){
             
             cout<<"Sun: "<<v[0]<<" "<<v[1]<<" "<<v[2]<<" ";

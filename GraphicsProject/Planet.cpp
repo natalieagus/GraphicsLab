@@ -34,6 +34,15 @@ double Planet::getRadius(){
     return this->r;
 }
 
+void Planet::setDist(double new_R){
+    
+    this->R = new_R;
+}
+void Planet::setRadius(double new_r){
+    
+    this->r = new_r;
+}
+
 double Planet::getMass(){
     
     return this->m;
