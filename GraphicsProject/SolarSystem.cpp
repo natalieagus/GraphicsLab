@@ -19,7 +19,7 @@
 
 
 #define GRAV_C 6.67*pow(10,-11)
-#define SCALE_F 0.001289
+#define SCALE_F 0.1289
 #define m_E 5.972 * pow(10,24)
 #define AU 1.496 * pow(10,11)
 
@@ -74,7 +74,8 @@ SolarSystem::SolarSystem(char* filePath){
         }
     }
     this->sysSize = planets.size();
-    this->min_dist = *min_element(all_dist.begin(), all_dist.end());
+    this->min_dist = 1150;
+    //this->min_dist = *min_element(all_dist.begin(), all_dist.end());
 //    
 //    for(int n=0;n<sysSize;n++){
 //        
@@ -150,36 +151,36 @@ void SolarSystem::draw(){
 //    return vel;
 //}
 
-vector<Vector3f> SolarSystem::evalF2(vector<Vector3f> state){
-    
-    vector<Vector3f> vel;
-    vel.push_back(Vector3f(0,0,0)); //sun always 0
-    for(int i=1; i<sysSize;i++){
-        
-        Vector3f pos = state[i],v;
-        
-        //adjust for negative 0 because using double
-        if(pos.x()==0){
-
-            v = Vector3f(pos.z(),pos.y(),pos.x());
-        }
-        else{
-            v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
-                       }
-        
-        //vel.push_back(vel_factor[i]*v.normalized());
-        vel.push_back(v);
-        if(i==0){
-            
-            cout<<"Sun: "<<v[0]<<" "<<v[1]<<" "<<v[2]<<" ";
-            cout<<endl;
-        }
-        
-    }
-    
-    
-    return vel;
-}
+//vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
+//    
+//    vector<Vector3f> vel;
+//    vel.push_back(Vector3f(0,0,0)); //sun always 0
+//    for(int i=1; i<sysSize;i++){
+//        
+//        Vector3f pos = state[i],v;
+//        
+//        //adjust for negative 0 because using double
+//        if(pos.x()==0){
+//
+//            v = Vector3f(pos.z(),pos.y(),pos.x());
+//        }
+//        else{
+//            v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
+//                       }
+//        
+//        //vel.push_back(vel_factor[i]*v.normalized());
+//        vel.push_back(v);
+////        if(i==0){
+////            
+////            //cout<<"Sun: "<<v[0]<<" "<<v[1]<<" "<<v[2]<<" ";
+////            //cout<<endl;
+////        }
+//        
+//    }
+//    
+//    
+//    return vel;
+//}
 
 vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
     
@@ -217,7 +218,8 @@ vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
             }
             
         }
-        float k = sqrt(sum*(double)GRAV_C)*SCALE_F;
+        //float k = sqrt(sum*(double)GRAV_C)*SCALE_F;
+        float k = sqrt(sum*(double)GRAV_C);
         vel.push_back(k*v.normalized());
         //vel.push_back(v);
         if(i==0){

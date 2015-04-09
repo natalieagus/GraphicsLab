@@ -40,7 +40,7 @@ void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
     cout <<"solarsystemsetup"<<endl;
     timestepper = new RK4();
-    stepSize = 0.04f;
+    stepSize = 365.f;
     
 }
 void initRendering() {
@@ -101,23 +101,34 @@ void handleResize(int w, int h) {
 void drawPlanets(SolarSystem* solsys){
     vector<Planet> p = solsys->planets;
     vector<Vector3f> states = solsys->getState();
+    double minDist = solsys->min_dist;
+    
     float drawDistance = 0;
     float prevRad = 0;
-    for (int i = 0; i<p.size(); i++){
+    for (int i = 0; i<solsys->sysSize; i++){
+        
         glPushMatrix();
-        Vector3f pos = states[i];
-        drawDistance += p[i].getDist() + prevRad;
-        float rad = 0;
-        if (p[i].getRadius() > 13){
-            rad = 13;
+       // cout << "Original Position of planet: " << i << " is " << states[i][0] << " " << states[i][1] << " " <<states[i][2]<<endl;
+        Vector3f pos;
+        vector<double>pos_xyz;
+        
+        if (i!=0){
+        double scale = pow(states[i].abs()/minDist,1.0/3.0);
+            
+        pos = scale*states[i].normalized();
         }
         else{
-            rad = p[i].getRadius();
+            pos = states[i];
         }
-        prevRad = rad;
-        glTranslatef(-drawDistance, 0, 0.0f);
-        // glTranslatef(pos[0], pos[1], pos[2]);
-        if(rad <= 12.999){
+        
+       // cout << "Position of planet: " << i << " " << pos[0] << " " <<pos[1] << " " <<pos[2]<<endl;
+      //  drawDistance += p[i].getDist() + prevRad;
+        double rad = pow(p[i].getRadius()/minDist, 1.0/3.0);
+     //   prevRad = rad;
+       // glTranslatef(-drawDistance, 0, 0.0f);
+        glTranslatef(pos[0], pos[1], pos[2]);
+        
+        if(i != 0){
               glRotatef(_angle, 0, 1, 0);
         }
         
@@ -126,7 +137,15 @@ void drawPlanets(SolarSystem* solsys){
             gluSphere(sphere, rad, 20, 20);
             glEnable(GL_LIGHTING);
         }
+        if (i == 3){
+            //glEnable(GL_COLOR_MATERIAL);
+            glColor3f(1, 0, 0);
+            glutSolidSphere(rad,20,20);
+            //glDisable(GL_COLOR_MATERIAL);
+            glColor3f(1,1,1);
+        }
         else{
+            
             gluSphere(sphere, rad, 20, 20);
 
         }
@@ -142,44 +161,44 @@ void drawScene() {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 100.0f);
+    gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 400.0f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0, 0.0, 85.0, //eye is at 0,0,100 so that sun is at origin
+    gluLookAt(0.0, 135.0, 0.0, //eye is at 0,0,100 so that sun is at origin
               0.0, 0.0, 0.0, //look at origin
-              0.0, 1.0, 0.0); //upwards
+              0.0, 0.0, -1.0); //upwards
     
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
   // render the solar system
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
- //   drawPlanets(SolSys);
+    drawPlanets(SolSys);
     glDisable(GL_LIGHTING);
     
 
-    glPushMatrix();
-    glTranslatef(0.0f, 0.0f, 0.0f);
-    glPushMatrix();
-    glRotatef(_angle, 0, 1, 0);
-    gluSphere(sphere, 8.45, 20, 20);
-    glPopMatrix();
-    glPopMatrix();
-    
-////
-   // glLoadIdentity();
-    glPushMatrix();
-    glTranslatef(-97.47, 0.0f, 0.0f);
-    glRotatef(_angle, 0, 1, 0);
-    gluSphere(sphere, 1, 20,20);
-   // glutSwapBuffers();
-    glPopMatrix();
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(-49.6, 0.0f, 0.0f);
-    glRotatef(_angle, 0, 1, 0);
-    gluSphere(sphere, 3.96, 20,20);
+//    glPushMatrix();
+//    glTranslatef(0.0f, 0.0f, 0.0f);
+//    glPushMatrix();
+//    glRotatef(_angle, 0, 1, 0);
+//    gluSphere(sphere, 8.45, 20, 20);
+//    glPopMatrix();
+//    glPopMatrix();
+//    
+//////
+//   // glLoadIdentity();
+//    glPushMatrix();
+//    glTranslatef(-97.47, 0.0f, 0.0f);
+//    glRotatef(_angle, 0, 1, 0);
+//    gluSphere(sphere, 1, 20,20);
+//   // glutSwapBuffers();
+//    glPopMatrix();
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslatef(-49.6, 0.0f, 0.0f);
+//    glRotatef(_angle, 0, 1, 0);
+//    gluSphere(sphere, 3.96, 20,20);
     glutSwapBuffers();
     
 }
