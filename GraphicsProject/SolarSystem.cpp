@@ -16,6 +16,7 @@
 #include <istream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <random>
 
 
 #define GRAV_C 6.67*pow(10,-11)
@@ -65,7 +66,8 @@ SolarSystem::SolarSystem(char* filePath){
             cout << atof(toks [1]) << " " << toks[2]<<endl;
             Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]));
             this->planets.push_back(p);
-            pos.push_back(Vector3f(p.getDist(),0,0));
+            float rdm = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/2));
+            pos.push_back(Vector3f(p.getDist()*cos(rdm*M_PI),0,p.getDist()*sin(rdm*M_PI)));
             all_dist.push_back(p.getDist());
             //vel.push_back(Vector3f(0,0,0));
             cout << "doing values" << pos.size() <<endl;
