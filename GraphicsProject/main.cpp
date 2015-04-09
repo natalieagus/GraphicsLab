@@ -174,9 +174,14 @@ void stepSystem()
     if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
         
-        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<endl;
-        cout << "Position of Second planet is now: " << SolSys->getState()[2][0] << " " <<SolSys->getState()[2][1]<< " " <<endl;
-        cout << "Position of Third planet is now: " << SolSys->getState()[3][0] << " " <<SolSys->getState()[3][1]<< " " <<endl;
+        vector<Vector3f> cur_state = SolSys->getState();
+        
+//        cout << "Position of First planet is now: " << cur_state[1][0] << " " <<cur_state[1][2]<< " " << cur_state[1].abs()<<","<<SolSys->planets[1].getDist()<<endl;
+//        cout << "Position of Second planet is now: " << cur_state[2][0] << " " <<cur_state[2][2]<< " " <<cur_state[2].abs()<<","<<SolSys->planets[2].getDist()<<endl;
+//        cout << "Position of Third planet is now: " << cur_state[3][0] << " " <<cur_state[3][2]<< " " <<cur_state[3].abs()<<","<<SolSys->planets[3].getDist()<<endl;
+        
+        cout<<"Distances: "<<cur_state[1].abs()<<" "<<cur_state[2].abs()<<" "<<cur_state[3].abs()<<" "<<endl;
+        
     }
     
 }
