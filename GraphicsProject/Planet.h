@@ -24,6 +24,9 @@ public:
     double getRadius();
     double getDist();
     double getMass();
+
+    void setRadius(double new_r);
+    void setDist(double new_R);
     void draw();
     void toString();
     
