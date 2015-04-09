@@ -73,6 +73,8 @@ void initRendering() {
     glEnable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
     
+    
+    //Texture Loading
     glShadeModel(GL_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);
     glDisable(GL_CULL_FACE);
@@ -98,10 +100,12 @@ void handleResize(int w, int h) {
    }
 void drawPlanets(SolarSystem* solsys){
     vector<Planet> p = solsys->planets;
+    vector<Vector3f> states = solsys->getState();
     float drawDistance = 0;
     float prevRad = 0;
     for (int i = 0; i<p.size(); i++){
         glPushMatrix();
+        Vector3f pos = states[i];
         drawDistance += p[i].getDist() + prevRad;
         float rad = 0;
         if (p[i].getRadius() > 13){
@@ -112,9 +116,11 @@ void drawPlanets(SolarSystem* solsys){
         }
         prevRad = rad;
         glTranslatef(-drawDistance, 0, 0.0f);
+        // glTranslatef(pos[0], pos[1], pos[2]);
         if(rad <= 12.999){
               glRotatef(_angle, 0, 1, 0);
         }
+        
         if (i == 0){
             glDisable(GL_LIGHTING);
             gluSphere(sphere, rad, 20, 20);
@@ -126,43 +132,54 @@ void drawPlanets(SolarSystem* solsys){
         }
         
         glPopMatrix();
+        glPopMatrix();
     }
 }
 //called every  time
 void drawScene() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glBindTexture(GL_TEXTURE_2D, texId);
+  //  glBindTexture(GL_TEXTURE_2D, texId);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 100.0f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0, 0.0, 100.0, //eye is at 0,0,100 so that sun is at origin
+    gluLookAt(0.0, 0.0, 85.0, //eye is at 0,0,100 so that sun is at origin
               0.0, 0.0, 0.0, //look at origin
               0.0, 1.0, 0.0); //upwards
     
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-//    // render the solar system
+  // render the solar system
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-    drawPlanets(SolSys);
+ //   drawPlanets(SolSys);
     glDisable(GL_LIGHTING);
     
 
-//    glPushMatrix();
-// //   glTranslatef(0.0f, 0.0f, -100.0f);
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 1, 20, 20);
-//    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(0.0f, 0.0f, 0.0f);
+    glPushMatrix();
+    glRotatef(_angle, 0, 1, 0);
+    gluSphere(sphere, 8.45, 20, 20);
+    glPopMatrix();
+    glPopMatrix();
     
 ////
-//    glLoadIdentity();
-//    glPushMatrix();
-//    glTranslatef(-30, 0.0f, -100.f);
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 0.3, 50, 50);
+   // glLoadIdentity();
+    glPushMatrix();
+    glTranslatef(-97.47, 0.0f, 0.0f);
+    glRotatef(_angle, 0, 1, 0);
+    gluSphere(sphere, 1, 20,20);
+   // glutSwapBuffers();
+    glPopMatrix();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-49.6, 0.0f, 0.0f);
+    glRotatef(_angle, 0, 1, 0);
+    gluSphere(sphere, 3.96, 20,20);
     glutSwapBuffers();
     
 }
@@ -173,10 +190,10 @@ void stepSystem()
     //if using RK45 then stepsize should change according to the timestepper's timestep
     if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
-        
-        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<endl;
-        cout << "Position of Second planet is now: " << SolSys->getState()[2][0] << " " <<SolSys->getState()[2][1]<< " " <<endl;
-        cout << "Position of Third planet is now: " << SolSys->getState()[3][0] << " " <<SolSys->getState()[3][1]<< " " <<endl;
+//        
+//        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<endl;
+//        cout << "Position of Second planet is now: " << SolSys->getState()[2][0] << " " <<SolSys->getState()[2][1]<< " " <<endl;
+//        cout << "Position of Third planet is now: " << SolSys->getState()[3][0] << " " <<SolSys->getState()[3][1]<< " " <<endl;
     }
     
 }
@@ -226,7 +243,7 @@ int main(int argc, char * argv[]) {
     
     
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(1200, 700);
+    glutInitWindowSize(1280, 720);
     glutCreateWindow("Solar System");
     initRendering();
     glutDisplayFunc(drawScene);
