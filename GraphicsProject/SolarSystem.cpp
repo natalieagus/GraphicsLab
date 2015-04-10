@@ -54,7 +54,6 @@ SolarSystem::SolarSystem(char* filePath){
             char* tok;
             vector<char*> toks;
             
-            
             tok = strtok(line,",");
             
             while (tok != NULL)
@@ -64,7 +63,7 @@ SolarSystem::SolarSystem(char* filePath){
                 tok = strtok (NULL, ",");
             }
             cout << atof(toks [1]) << " " << toks[2]<<endl;
-            Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]));
+            Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]),toks[5]);
             this->planets.push_back(p);
             float rdm = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/2));
             pos.push_back(Vector3f(p.getDist()*cos(rdm*M_PI),0,p.getDist()*sin(rdm*M_PI)));
