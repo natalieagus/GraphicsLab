@@ -12,6 +12,7 @@
 		2C408F641ACC1E650045BA78 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F631ACC1E650045BA78 /* Cocoa.framework */; };
 		2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */; };
 		2C408F881ACF7D9A0045BA78 /* TimeStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */; };
+		2CB3B4031AD7DA3C00A09B69 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3B4011AD7DA3C00A09B69 /* camera.cpp */; };
 		2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEE3531ABFD9A20032C8DB /* main.cpp */; };
 		FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */; };
 		FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */; };
@@ -40,12 +41,10 @@
 		2C408F5F1ACC1E5C0045BA78 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		2C408F611ACC1E600045BA78 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		2C408F631ACC1E650045BA78 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Startup_screen.bmp; sourceTree = "<group>"; };
 		2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoad.cpp; sourceTree = "<group>"; };
 		2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoad.h; sourceTree = "<group>"; };
 		2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStepper.cpp; sourceTree = "<group>"; };
 		2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeStepper.hpp; sourceTree = "<group>"; };
-		2C8059971AD7AD1A005E1471 /* pic2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pic2.bmp; sourceTree = "<group>"; };
 		2C8059981AD7B1F2005E1471 /* earth.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = earth.bmp; path = ../earth.bmp; sourceTree = "<group>"; };
 		2C80599A1AD7B3E2005E1471 /* mars.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = mars.bmp; path = ../mars.bmp; sourceTree = "<group>"; };
 		2C80599B1AD7B44C005E1471 /* sun.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = sun.bmp; path = ../sun.bmp; sourceTree = "<group>"; };
@@ -57,6 +56,9 @@
 		2C8059A41AD7B6EA005E1471 /* uranus.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = uranus.bmp; path = ../uranus.bmp; sourceTree = "<group>"; };
 		2C8059A51AD7B724005E1471 /* venus.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = venus.bmp; path = ../venus.bmp; sourceTree = "<group>"; };
 		2C8059A61AD7B788005E1471 /* asteroid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = asteroid.bmp; path = ../asteroid.bmp; sourceTree = "<group>"; };
+		2C8059AB1AD7D45B005E1471 /* stars.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = stars.bmp; path = ../stars.bmp; sourceTree = "<group>"; };
+		2CB3B4011AD7DA3C00A09B69 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		2CB3B4021AD7DA3C00A09B69 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FD788ACE1ACEDE1100535097 /* sunEarthData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sunEarthData.csv; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				2C80599B1AD7B44C005E1471 /* sun.bmp */,
 				2C80599A1AD7B3E2005E1471 /* mars.bmp */,
 				2C8059A51AD7B724005E1471 /* venus.bmp */,
+				2C8059AB1AD7D45B005E1471 /* stars.bmp */,
 				2C8059A21AD7B674005E1471 /* mercury.bmp */,
 				2C8059A41AD7B6EA005E1471 /* uranus.bmp */,
 				2C8059A61AD7B788005E1471 /* asteroid.bmp */,
@@ -145,11 +148,11 @@
 				2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */,
 				2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */,
 				FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */,
+				2CB3B4011AD7DA3C00A09B69 /* camera.cpp */,
+				2CB3B4021AD7DA3C00A09B69 /* camera.h */,
 				2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */,
 				2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */,
 				FDF0A79E1AC2CA7100C74A38 /* Planet.h */,
-				2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */,
-				2C8059971AD7AD1A005E1471 /* pic2.bmp */,
 				FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */,
 				FDF0A7BA1AC2CF8800C74A38 /* SolarSystem.h */,
 			);
@@ -250,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB3B4031AD7DA3C00A09B69 /* camera.cpp in Sources */,
 				FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */,
 				2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */,
 				FDF0A7B71AC2CAF700C74A38 /* Vector3f.cpp in Sources */,

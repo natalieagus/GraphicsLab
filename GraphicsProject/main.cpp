@@ -22,7 +22,9 @@
 #include <thread>
 #include "math.h"
 #include "TimeStepper.hpp"
+#include "camera.h"
 
+Camera camera;
 using namespace std;
 int screenWidth, screenHeight;
 SolarSystem* SolSys;
@@ -35,6 +37,9 @@ const float SIZE = 10.0f;
 GLUquadricObj *sphere = NULL;
 float _angle = 0;
 GLuint texId;
+GLuint bgId;
+
+vector<GLuint> texIds;
 
 void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
@@ -44,58 +49,8 @@ void initialize(char* dataFile){
     
 }
 
-GLuint LoadTexture( const char * filename )
-{
-    
-    GLuint texture;
-    
-    int width, height;
-    
-    unsigned char * data;
-    
-    FILE * file;
-    
-    file = fopen( filename, "rb" );
-    
-    if ( file == NULL ) return 0;
-    width = 1024;
-    height = 512;
-    data = (unsigned char *)malloc( width * height * 3 );
-    //int size = fseek(file,);
-    fread( data, width * height * 3, 1, file );
-    fclose( file );
-    
-    for(int i = 0; i < width * height ; ++i)
-    {
-        int index = i*3;
-        unsigned char B,R;
-        B = data[index];
-        R = data[index+2];
-        
-        data[index] = R;
-        data[index+2] = B;
-        
-    }
-    
-    
-    glGenTextures( 1, &texture );
-    glBindTexture( GL_TEXTURE_2D, texture );
-    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST );
-    
-    
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_REPEAT );
-    gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,GL_RGB, GL_UNSIGNED_BYTE, data );
-    free( data );
-    
-    return texture;
-}
 
 void initRendering() {
-    glEnable(GL_DEPTH_TEST);
-
     
     // set up lighting
     glEnable(GL_LIGHTING);
@@ -123,27 +78,103 @@ void initRendering() {
     glEnable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
     
+    
     //Texture Loading
     glShadeModel(GL_SMOOTH);
-    glEnable(GL_COLOR_MATERIAL);
-    glDisable(GL_CULL_FACE);
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, texId);
-    Image* img = Image::loadBMP("asteroid.bmp");
-    texId = Image::loadTexture(img);
-    delete img;
+    
+    Image* imgBG = Image::loadBMP("stars.bmp");
+    bgId = Image::loadTexture(imgBG);
+    delete imgBG;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    Image* img = Image::loadBMP("sun.bmp");
+    GLuint td = Image::loadTexture(img);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td);
+    delete img;
+    
+    Image* img2 = Image::loadBMP("mercury.bmp");
+    GLuint td2 = Image::loadTexture(img2);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td2);
+    delete img2;
+    
+    Image* img3 = Image::loadBMP("venus.bmp");
+    GLuint td3 = Image::loadTexture(img3);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td3);
+    delete img3;
+    
+    Image* img4 = Image::loadBMP("earth.bmp");
+    GLuint td4 = Image::loadTexture(img4);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td4);
+    delete img4;
+    
+    Image* img5 = Image::loadBMP("mars.bmp");
+    GLuint td5 = Image::loadTexture(img5);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td5);
+    delete img5;
+    
+    Image* img6 = Image::loadBMP("jupiter.bmp");
+    GLuint td6 = Image::loadTexture(img6);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td6);
+    delete img6;
+    
+    Image* img7 = Image::loadBMP("saturn.bmp");
+    GLuint td7 = Image::loadTexture(img7);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td7);
+    delete img7;
+    
+    Image* img8 = Image::loadBMP("uranus.bmp");
+    GLuint td8 = Image::loadTexture(img8);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td8);
+    delete img8;
+    
+    Image* img9 = Image::loadBMP("neptune.bmp");
+    GLuint td9 = Image::loadTexture(img9);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td9);
+    delete img9;
+    
+    Image* img10 = Image::loadBMP("pluto.bmp");
+    GLuint td10 = Image::loadTexture(img10);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texIds.push_back(td10);
+    delete img10;
+
     sphere = gluNewQuadric();
     gluQuadricDrawStyle(sphere, GLU_FILL);
     gluQuadricTexture(sphere, GL_TRUE);
     gluQuadricNormals(sphere, GLU_SMOOTH);
 }
 
+
 void handleResize(int w, int h) {
     glViewport(0, 0, w, h);
     screenWidth = w;
     screenHeight = h;
+    
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(1,w, h,1,-100,100);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(100.0f, (float)screenWidth / (float)screenHeight, 0.001f, 500.0f);
@@ -156,7 +187,7 @@ void drawPlanets(SolarSystem* solsys){
     float drawDistance = 0;
     float prevRad = 0;
     for (int i = 0; i<solsys->sysSize; i++){
-        
+        glBindTexture(GL_TEXTURE_2D, texIds[i]);
         glPushMatrix();
        // cout << "Original Position of planet: " << i << " is " << states[i][0] << " " << states[i][1] << " " <<states[i][2]<<endl;
         Vector3f pos;
@@ -182,67 +213,125 @@ void drawPlanets(SolarSystem* solsys){
               glRotatef(_angle, 0, 1, 0);
         }
         
+        glRotatef(90, 1, 0, 0);//rotate for orientation
+
         if (i == 0){
             glDisable(GL_LIGHTING);
             gluSphere(sphere, rad, 20, 20);
             glEnable(GL_LIGHTING);
         }
-        if (i == 3){
-            //glEnable(GL_COLOR_MATERIAL);
-            glColor3f(1, 0, 0);
-            glutSolidSphere(rad,20,20);
-            //glDisable(GL_COLOR_MATERIAL);
-            glColor3f(1,1,1);
-        }
+      
         else{
-            
             gluSphere(sphere, rad, 20, 20);
 
         }
         
         glPopMatrix();
         glPopMatrix();
+        glPopMatrix();
     }
 }
 //called every  time
-void drawScene() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+void drawCube(void)
+{
+    glBegin(GL_QUADS);
+    // new face
+    glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
+    // new face
+    glTexCoord2f(0.0f, 0.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
+    // new face
+    glTexCoord2f(0.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
+    // new face
+    glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
+    // new face
+    glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
+    // new face
+    glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
+    
+    glEnd();
+}
+
+void drawScene() {
+    
+    glDisable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(1,1,1,1,-100,100);
+    
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glBindTexture(GL_TEXTURE_2D, bgId);
+    drawCube();
+    
+    
+    glEnable(GL_DEPTH_TEST);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 400.0f);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0.0, 0.0, 60.0, //eye is at 0,0,100 so that sun is at origin
-              0.0, 0.0, 0.0, //look at origin
-              0.0, 1.0, 0.0); //upwards
     
+    
+    glLoadIdentity();
+   // gluLookAt(0.0, 20.0, 100.0, //eye is at 0,0,100 so that sun is at origin
+              //0.0, 0.0, 0.0, //look at origin
+              //0.0, 1.0, -0.2); //upwards
+    glLoadMatrixf(camera.viewMatrix());
+
+   // glRotatef(90, 1, 0, 0);
+    
+  
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
   // render the solar system
+    
+
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-   // drawPlanets(SolSys);
+    drawPlanets(SolSys);
     glDisable(GL_LIGHTING);
     
 
-    glPushMatrix();
-    glTranslatef(0.0f, 0.0f, 0.0f);
-    glPushMatrix();
-    glRotatef(_angle, 0, 1, 0);
-    gluSphere(sphere, 8.45, 20, 20);
-    glPopMatrix();
-    glPopMatrix();
+//    glPushMatrix();
+//    glTranslatef(0.0f, 0.0f, 0.0f);
+//    glPushMatrix();
+//    glRotatef(_angle, 0, 1, 0);
+//    gluSphere(sphere, 8.45, 20, 20);
+//    glPopMatrix();
+//    glPopMatrix();
     
 ////
    // glLoadIdentity();
-    glPushMatrix();
-    glTranslatef(-97.47, 0.0f, 0.0f);
-    glRotatef(_angle, 0, 1, 0);
-    gluSphere(sphere, 1, 20,20);
-   // glutSwapBuffers();
-    glPopMatrix();
-    glPopMatrix();
+//    glPushMatrix();
+//    glTranslatef(-97.47, 0.0f, 0.0f);
+//    glRotatef(_angle, 0, 1, 0);
+//    gluSphere(sphere, 1, 20,20);
+//   // glutSwapBuffers();
+//    glPopMatrix();
+//    glPopMatrix();
     
 //    glPushMatrix();
 //    glTranslatef(-49.6, 0.0f, 0.0f);
@@ -284,6 +373,41 @@ void update(int value) {
     
 }
 
+void motionFunc(int x, int y)
+{
+    camera.MouseDrag(x, y);
+    
+    glutPostRedisplay();
+}
+
+
+void mouseFunc(int button, int state, int x, int y)
+{
+    if (state == GLUT_DOWN)
+    {
+     //   g_mousePressed = true;
+        
+        switch (button)
+        {
+            case GLUT_LEFT_BUTTON:
+                camera.MouseClick(Camera::LEFT, x, y);
+//                break;
+//            case GLUT_MIDDLE_BUTTON:
+//                camera.MouseClick(Camera::MIDDLE, x, y);
+//                break;
+//            case GLUT_RIGHT_BUTTON:
+//                camera.MouseClick(Camera::RIGHT, x, y);
+            default:
+                break;
+        }
+    }
+    else
+    {
+        camera.MouseRelease(x, y);
+     //   g_mousePressed = false;
+    }
+    glutPostRedisplay();
+}
 
 int main(int argc, char * argv[]) {
     glutInit(&argc, argv);
@@ -311,9 +435,15 @@ int main(int argc, char * argv[]) {
     
     
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(1280, 720);
+    glutInitWindowSize(1280, 1024);
+    camera.SetDimensions(1280, 1024);
+    camera.SetDistance(80);
+    camera.SetCenter(Vector3f::ZERO);
     glutCreateWindow("Solar System");
     initRendering();
+    glutMouseFunc(mouseFunc);
+    glutMotionFunc(motionFunc);
+
     glutDisplayFunc(drawScene);
     glutReshapeFunc(handleResize);
     glutTimerFunc(20, update, 0);

@@ -121,6 +121,7 @@ namespace {
 Image* Image::loadBMP(const char* filename) {
     ifstream input;
     input.open(filename, ifstream::binary);
+    cout << filename << "FILENAME" << endl;
     assert(!input.fail() || !"Could not find file");
     char buffer[2];
     input.read(buffer, 2);
