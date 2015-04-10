@@ -49,7 +49,6 @@ GLuint bgId;
 //Initializing solar system
 void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
-    cout <<"solarsystemsetup"<<endl;
     timestepper = new RK4();
     stepSize = 365.f;
 }
@@ -94,75 +93,78 @@ void initRendering() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    Image* img = Image::loadBMP("sun.bmp");
-    GLuint td = Image::loadTexture(img);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td);
-    delete img;
+//    Image* img = Image::loadBMP("sun.bmp");
+//    GLuint td = Image::loadTexture(img);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td);
+//    delete img;
+//    
+//    Image* img2 = Image::loadBMP("mercury.bmp");
+//    GLuint td2 = Image::loadTexture(img2);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td2);
+//    delete img2;
+//    
+//    Image* img3 = Image::loadBMP("venus.bmp");
+//    GLuint td3 = Image::loadTexture(img3);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td3);
+//    delete img3;
+//    
+//    Image* img4 = Image::loadBMP("earth.bmp");
+//    GLuint td4 = Image::loadTexture(img4);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td4);
+//    delete img4;
+//    
+//    Image* img5 = Image::loadBMP("mars.bmp");
+//    GLuint td5 = Image::loadTexture(img5);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td5);
+//    delete img5;
+//    
+//    Image* img6 = Image::loadBMP("jupiter.bmp");
+//    GLuint td6 = Image::loadTexture(img6);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td6);
+//    delete img6;
+//    
+//    Image* img7 = Image::loadBMP("saturn.bmp");
+//    GLuint td7 = Image::loadTexture(img7);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td7);
+//    delete img7;
+//    
+//    Image* img8 = Image::loadBMP("uranus.bmp");
+//    GLuint td8 = Image::loadTexture(img8);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td8);
+//    delete img8;
+//    
+//    Image* img9 = Image::loadBMP("neptune.bmp");
+//    GLuint td9 = Image::loadTexture(img9);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td9);
+//    delete img9;
+//    
+//    Image* img10 = Image::loadBMP("pluto.bmp");
+//    GLuint td10 = Image::loadTexture(img10);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    texIds.push_back(td10);
+//    delete img10;
     
-    Image* img2 = Image::loadBMP("mercury.bmp");
-    GLuint td2 = Image::loadTexture(img2);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td2);
-    delete img2;
-    
-    Image* img3 = Image::loadBMP("venus.bmp");
-    GLuint td3 = Image::loadTexture(img3);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td3);
-    delete img3;
-    
-    Image* img4 = Image::loadBMP("earth.bmp");
-    GLuint td4 = Image::loadTexture(img4);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td4);
-    delete img4;
-    
-    Image* img5 = Image::loadBMP("mars.bmp");
-    GLuint td5 = Image::loadTexture(img5);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td5);
-    delete img5;
-    
-    Image* img6 = Image::loadBMP("jupiter.bmp");
-    GLuint td6 = Image::loadTexture(img6);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td6);
-    delete img6;
-    
-    Image* img7 = Image::loadBMP("saturn.bmp");
-    GLuint td7 = Image::loadTexture(img7);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td7);
-    delete img7;
-    
-    Image* img8 = Image::loadBMP("uranus.bmp");
-    GLuint td8 = Image::loadTexture(img8);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td8);
-    delete img8;
-    
-    Image* img9 = Image::loadBMP("neptune.bmp");
-    GLuint td9 = Image::loadTexture(img9);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td9);
-    delete img9;
-    
-    Image* img10 = Image::loadBMP("pluto.bmp");
-    GLuint td10 = Image::loadTexture(img10);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    texIds.push_back(td10);
-    delete img10;
+    SolSys->setTextures();
+    texIds = SolSys->textures;
 
     //create new quadric sphere for drawing
     sphere = gluNewQuadric();

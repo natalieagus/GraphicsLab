@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <random>
-
+#include "ImageLoad.h"
 
 #define GRAV_C 6.67*pow(10,-11)
 #define SCALE_F 0.1289
@@ -62,14 +62,13 @@ SolarSystem::SolarSystem(char* filePath){
                 toks.push_back(tok);
                 tok = strtok (NULL, ",");
             }
-            cout << atof(toks [1]) << " " << toks[2]<<endl;
+            
             Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]),toks[5]);
             this->planets.push_back(p);
+            cout <<"Planet tex file is: "<<p.getTexFile()<< endl;
             float rdm = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/2));
             pos.push_back(Vector3f(p.getDist()*cos(rdm*M_PI),0,p.getDist()*sin(rdm*M_PI)));
             all_dist.push_back(p.getDist());
-            //vel.push_back(Vector3f(0,0,0));
-            cout << "doing values" << pos.size() <<endl;
             
             
         }
@@ -248,5 +247,20 @@ void SolarSystem::toString(){
     
     for(int i=0;i<this->planets.size();i++){
         this->planets[i].toString();
+    }
+}
+
+
+void SolarSystem::setTextures(){
+    
+    for (int i = 0; i<planets.size(); i++){
+        string filename = planets[i].getTexFile();
+        const char* filenameChar = filename.c_str();
+        Image* img = Image::loadBMP(filenameChar);
+        GLuint td = Image::loadTexture(img);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        textures.push_back(td);
+        delete img;
     }
 }

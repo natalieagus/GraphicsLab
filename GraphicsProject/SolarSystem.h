@@ -12,7 +12,9 @@
 #include <stdio.h>
 #include "Planet.h"
 
-
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#include <OpenGL/gl.h>
 
 class SolarSystem{
  
@@ -25,6 +27,9 @@ public:
     vector<Vector3f> state;
     vector<Vector3f> oldstate;
     double min_dist;
+    vector<GLuint> textures;
+    
+    void setTextures();
     int sysSize;    //no. of planets
     vector<Vector3f> getState();
     vector<Vector3f> evalF(vector<Vector3f> currentState);
