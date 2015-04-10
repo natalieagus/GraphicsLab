@@ -13,6 +13,8 @@
 		2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */; };
 		2C408F881ACF7D9A0045BA78 /* TimeStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */; };
 		2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEE3531ABFD9A20032C8DB /* main.cpp */; };
+		FD616DBB1AD7A22F004F5714 /* asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD616DB91AD7A22F004F5714 /* asteroid.cpp */; };
+		FD616DBE1AD7AAE8004F5714 /* asteroidSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD616DBC1AD7AAE7004F5714 /* asteroidSystem.cpp */; };
 		FDF0A79F1AC2CA7100C74A38 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */; };
 		FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AB1AC2CAF700C74A38 /* Matrix2f.cpp */; };
 		FDF0A7B31AC2CAF700C74A38 /* Matrix3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0A7AC1AC2CAF700C74A38 /* Matrix3f.cpp */; };
@@ -47,6 +49,10 @@
 		2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeStepper.hpp; sourceTree = "<group>"; };
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FD616DB91AD7A22F004F5714 /* asteroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asteroid.cpp; sourceTree = "<group>"; };
+		FD616DBA1AD7A22F004F5714 /* asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroid.h; sourceTree = "<group>"; };
+		FD616DBC1AD7AAE7004F5714 /* asteroidSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asteroidSystem.cpp; sourceTree = "<group>"; };
+		FD616DBD1AD7AAE8004F5714 /* asteroidSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroidSystem.h; sourceTree = "<group>"; };
 		FD788ACE1ACEDE1100535097 /* sunEarthData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sunEarthData.csv; sourceTree = "<group>"; };
 		FDC78A991AD6418D00B33AC7 /* fullPlanetData.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = fullPlanetData.csv; sourceTree = "<group>"; };
 		FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
@@ -118,6 +124,10 @@
 				FDF0A79E1AC2CA7100C74A38 /* Planet.h */,
 				2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */,
 				FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */,
+				FD616DB91AD7A22F004F5714 /* asteroid.cpp */,
+				FD616DBC1AD7AAE7004F5714 /* asteroidSystem.cpp */,
+				FD616DBD1AD7AAE8004F5714 /* asteroidSystem.h */,
+				FD616DBA1AD7A22F004F5714 /* asteroid.h */,
 				FDF0A7BA1AC2CF8800C74A38 /* SolarSystem.h */,
 			);
 			path = GraphicsProject;
@@ -221,6 +231,8 @@
 				2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */,
 				FDF0A7B71AC2CAF700C74A38 /* Vector3f.cpp in Sources */,
 				FDF0A7BB1AC2CF8800C74A38 /* SolarSystem.cpp in Sources */,
+				FD616DBB1AD7A22F004F5714 /* asteroid.cpp in Sources */,
+				FD616DBE1AD7AAE8004F5714 /* asteroidSystem.cpp in Sources */,
 				2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */,
 				FDF0A7B51AC2CAF700C74A38 /* Quat4f.cpp in Sources */,
 				2C408F881ACF7D9A0045BA78 /* TimeStepper.cpp in Sources */,

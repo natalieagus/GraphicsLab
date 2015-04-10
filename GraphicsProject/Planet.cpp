@@ -15,13 +15,13 @@
 
 using namespace std;
     
-Planet::Planet(string name, double R, double r, double m, double ang_v){
+Planet::Planet(string name, double R, double r, double m, double ang_v, char* tex_file){
     this->r = r;
     this->R = R;
     this->m = m;
     this->ang_v = ang_v;
     this->name = name;
-    
+    this->tex_file = tex_file;
 }
 
 double Planet::getDist(){

@@ -20,7 +20,7 @@ class Planet{
 
 public:
     
-    Planet( string name, double R, double r, double m, double ang_v);
+    Planet( string name, double R, double r, double m, double ang_v, char* tex_file);
     double getRadius();
     double getDist();
     double getMass();
@@ -38,6 +38,7 @@ private:
     double m;    //mass of Planet
     double ang_v;    //angular velocity
     double R;    //distance from sun
+    char* tex_file;
     string name;
     
 };
