@@ -15,7 +15,7 @@
 
 using namespace std;
     
-Planet::Planet(string name, double R, double r, double m, double ang_v, char* tex_file){
+Planet::Planet(string name, double R, double r, double m, double ang_v, string tex_file){
     this->r = r;
     this->R = R;
     this->m = m;
@@ -46,6 +46,12 @@ void Planet::setRadius(double new_r){
 double Planet::getMass(){
     
     return this->m;
+    
+}
+
+string Planet::getTexFile(){
+    
+    return tex_file;
     
 }
 

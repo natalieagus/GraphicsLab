@@ -14,21 +14,28 @@
 #include <vector>
 #include <string>
 
+
 using namespace std;
 
 class Planet{
 
 public:
     
-    Planet( string name, double R, double r, double m, double ang_v, char* tex_file);
+    Planet( string name, double R, double r, double m, double ang_v, string tex_file);
     double getRadius();
     double getDist();
     double getMass();
-
+    string getTexFile();
+    
+    
+    
     void setRadius(double new_r);
     void setDist(double new_R);
     void draw();
     void toString();
+    
+    
+    
     
     
     
@@ -38,7 +45,7 @@ private:
     double m;    //mass of Planet
     double ang_v;    //angular velocity
     double R;    //distance from sun
-    char* tex_file;
+    string tex_file;
     string name;
     
 };

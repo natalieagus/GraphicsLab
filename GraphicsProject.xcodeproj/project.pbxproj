@@ -12,6 +12,7 @@
 		2C408F641ACC1E650045BA78 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C408F631ACC1E650045BA78 /* Cocoa.framework */; };
 		2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */; };
 		2C408F881ACF7D9A0045BA78 /* TimeStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */; };
+		2CB3B4031AD7DA3C00A09B69 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3B4011AD7DA3C00A09B69 /* camera.cpp */; };
 		2CBEE3541ABFD9A20032C8DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEE3531ABFD9A20032C8DB /* main.cpp */; };
 		FD616DBB1AD7A22F004F5714 /* asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD616DB91AD7A22F004F5714 /* asteroid.cpp */; };
 		FD616DBE1AD7AAE8004F5714 /* asteroidSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD616DBC1AD7AAE7004F5714 /* asteroidSystem.cpp */; };
@@ -42,11 +43,24 @@
 		2C408F5F1ACC1E5C0045BA78 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		2C408F611ACC1E600045BA78 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		2C408F631ACC1E650045BA78 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Startup_screen.bmp; sourceTree = "<group>"; };
 		2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoad.cpp; sourceTree = "<group>"; };
 		2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoad.h; sourceTree = "<group>"; };
 		2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStepper.cpp; sourceTree = "<group>"; };
 		2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeStepper.hpp; sourceTree = "<group>"; };
+		2C8059981AD7B1F2005E1471 /* earth.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = earth.bmp; path = ../earth.bmp; sourceTree = "<group>"; };
+		2C80599A1AD7B3E2005E1471 /* mars.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = mars.bmp; path = ../mars.bmp; sourceTree = "<group>"; };
+		2C80599B1AD7B44C005E1471 /* sun.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = sun.bmp; path = ../sun.bmp; sourceTree = "<group>"; };
+		2C80599C1AD7B4C7005E1471 /* jupiter.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = jupiter.bmp; path = ../jupiter.bmp; sourceTree = "<group>"; };
+		2C80599D1AD7B503005E1471 /* saturn.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = saturn.bmp; path = ../saturn.bmp; sourceTree = "<group>"; };
+		2C8059A01AD7B600005E1471 /* neptune.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = neptune.bmp; path = ../neptune.bmp; sourceTree = "<group>"; };
+		2C8059A21AD7B674005E1471 /* mercury.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = mercury.bmp; path = ../mercury.bmp; sourceTree = "<group>"; };
+		2C8059A31AD7B6A9005E1471 /* pluto.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = pluto.bmp; path = ../pluto.bmp; sourceTree = "<group>"; };
+		2C8059A41AD7B6EA005E1471 /* uranus.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = uranus.bmp; path = ../uranus.bmp; sourceTree = "<group>"; };
+		2C8059A51AD7B724005E1471 /* venus.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = venus.bmp; path = ../venus.bmp; sourceTree = "<group>"; };
+		2C8059A61AD7B788005E1471 /* asteroid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = asteroid.bmp; path = ../asteroid.bmp; sourceTree = "<group>"; };
+		2C8059AB1AD7D45B005E1471 /* stars.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = stars.bmp; path = ../stars.bmp; sourceTree = "<group>"; };
+		2CB3B4011AD7DA3C00A09B69 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		2CB3B4021AD7DA3C00A09B69 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		2CBEE3501ABFD9A20032C8DB /* GraphicsProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphicsProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBEE3531ABFD9A20032C8DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FD616DB91AD7A22F004F5714 /* asteroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asteroid.cpp; sourceTree = "<group>"; };
@@ -90,6 +104,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C80599E1AD7B526005E1471 /* planetTextures */ = {
+			isa = PBXGroup;
+			children = (
+				2C8059981AD7B1F2005E1471 /* earth.bmp */,
+				2C80599C1AD7B4C7005E1471 /* jupiter.bmp */,
+				2C80599B1AD7B44C005E1471 /* sun.bmp */,
+				2C80599A1AD7B3E2005E1471 /* mars.bmp */,
+				2C8059A51AD7B724005E1471 /* venus.bmp */,
+				2C8059AB1AD7D45B005E1471 /* stars.bmp */,
+				2C8059A21AD7B674005E1471 /* mercury.bmp */,
+				2C8059A41AD7B6EA005E1471 /* uranus.bmp */,
+				2C8059A61AD7B788005E1471 /* asteroid.bmp */,
+				2C8059A01AD7B600005E1471 /* neptune.bmp */,
+				2C8059A31AD7B6A9005E1471 /* pluto.bmp */,
+				2C80599D1AD7B503005E1471 /* saturn.bmp */,
+			);
+			name = planetTextures;
+			path = vecmath;
+			sourceTree = "<group>";
+		};
 		2CBEE3471ABFD9A20032C8DB = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +146,7 @@
 		2CBEE3521ABFD9A20032C8DB /* GraphicsProject */ = {
 			isa = PBXGroup;
 			children = (
+				2C80599E1AD7B526005E1471 /* planetTextures */,
 				FDC78A991AD6418D00B33AC7 /* fullPlanetData.csv */,
 				FD788ACE1ACEDE1100535097 /* sunEarthData.csv */,
 				FDF0A7A01AC2CAF700C74A38 /* vecmath */,
@@ -119,10 +154,11 @@
 				2C408F6C1ACE4C4C0045BA78 /* ImageLoad.cpp */,
 				2C408F6D1ACE4C4C0045BA78 /* ImageLoad.h */,
 				FDF0A79D1AC2CA7100C74A38 /* Planet.cpp */,
+				2CB3B4011AD7DA3C00A09B69 /* camera.cpp */,
+				2CB3B4021AD7DA3C00A09B69 /* camera.h */,
 				2C408F861ACF7D9A0045BA78 /* TimeStepper.cpp */,
 				2C408F871ACF7D9A0045BA78 /* TimeStepper.hpp */,
 				FDF0A79E1AC2CA7100C74A38 /* Planet.h */,
-				2C408F6B1ACC2C490045BA78 /* Startup_screen.bmp */,
 				FDF0A7B91AC2CF8800C74A38 /* SolarSystem.cpp */,
 				FD616DB91AD7A22F004F5714 /* asteroid.cpp */,
 				FD616DBC1AD7AAE7004F5714 /* asteroidSystem.cpp */,
@@ -227,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB3B4031AD7DA3C00A09B69 /* camera.cpp in Sources */,
 				FDF0A7B21AC2CAF700C74A38 /* Matrix2f.cpp in Sources */,
 				2C408F6E1ACE4C4C0045BA78 /* ImageLoad.cpp in Sources */,
 				FDF0A7B71AC2CAF700C74A38 /* Vector3f.cpp in Sources */,
