@@ -24,32 +24,37 @@
 #include "TimeStepper.hpp"
 #include "camera.h"
 
-Camera camera;
+
 using namespace std;
+
+//Solar system set up variables
 int screenWidth, screenHeight;
 SolarSystem* SolSys;
 TimeStepper* timestepper;
 float stepSize;
 
-float distBuffer = -20;
-const float SIZE = 10.0f;
-#define M_PI    (3.14159265)
+//For camera variables
+Camera camera;
 GLUquadricObj *sphere = NULL;
 float _angle = 0;
-GLuint texId;
+GLfloat zoom;
+GLfloat side;
+GLfloat updown;
+
+//Texture Ids for texture binding
+vector<GLuint> texIds;
 GLuint bgId;
 
-vector<GLuint> texIds;
 
+//Initializing solar system
 void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
     cout <<"solarsystemsetup"<<endl;
     timestepper = new RK4();
     stepSize = 365.f;
-    
 }
 
-
+//Initializing rendering (lights, and texture loading)
 void initRendering() {
     
     // set up lighting
@@ -159,13 +164,16 @@ void initRendering() {
     texIds.push_back(td10);
     delete img10;
 
+    //create new quadric sphere for drawing
     sphere = gluNewQuadric();
     gluQuadricDrawStyle(sphere, GLU_FILL);
     gluQuadricTexture(sphere, GL_TRUE);
     gluQuadricNormals(sphere, GLU_SMOOTH);
+    
 }
 
 
+//Resizing function
 void handleResize(int w, int h) {
     glViewport(0, 0, w, h);
     screenWidth = w;
@@ -179,6 +187,8 @@ void handleResize(int w, int h) {
     glLoadIdentity();
     gluPerspective(100.0f, (float)screenWidth / (float)screenHeight, 0.001f, 500.0f);
    }
+
+//Planet rendering function
 void drawPlanets(SolarSystem* solsys){
     vector<Planet> p = solsys->planets;
     vector<Vector3f> states = solsys->getState();
@@ -189,7 +199,6 @@ void drawPlanets(SolarSystem* solsys){
     for (int i = 0; i<solsys->sysSize; i++){
         glBindTexture(GL_TEXTURE_2D, texIds[i]);
         glPushMatrix();
-       // cout << "Original Position of planet: " << i << " is " << states[i][0] << " " << states[i][1] << " " <<states[i][2]<<endl;
         Vector3f pos;
         vector<double>pos_xyz;
         
@@ -202,28 +211,25 @@ void drawPlanets(SolarSystem* solsys){
             pos = states[i];
         }
         
-       // cout << "Position of planet: " << i << " " << pos[0] << " " <<pos[1] << " " <<pos[2]<<endl;
-      //  drawDistance += p[i].getDist() + prevRad;
         double rad = pow(p[i].getRadius()/minDist, 1.0/3.0);
-     //   prevRad = rad;
-       // glTranslatef(-drawDistance, 0, 0.0f);
         glTranslatef(pos[0], pos[1], pos[2]);
         
-        if(i != 0){
+        if(i != 0){ //self rotation
               glRotatef(_angle, 0, 1, 0);
         }
         
         glRotatef(90, 1, 0, 0);//rotate for orientation
 
-        if (i == 0){
+        if (i == 0){ //if sun, then its the source of light, off lighting
             glDisable(GL_LIGHTING);
             gluSphere(sphere, rad, 20, 20);
             glEnable(GL_LIGHTING);
         }
       
         else{
+            glEnable(GL_LIGHTING);
             gluSphere(sphere, rad, 20, 20);
-
+            glDisable(GL_LIGHTING);
         }
         
         glPopMatrix();
@@ -231,8 +237,8 @@ void drawPlanets(SolarSystem* solsys){
         glPopMatrix();
     }
 }
-//called every  time
 
+//Background cube for rendering stars
 void drawCube(void)
 {
     glBegin(GL_QUADS);
@@ -270,8 +276,10 @@ void drawCube(void)
     glEnd();
 }
 
+//Update draw function
 void drawScene() {
     
+    //Setup background with orthographic camera
     glDisable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -286,6 +294,7 @@ void drawScene() {
     drawCube();
     
     
+    //Setup perspective camera for solar system rendering
     glEnable(GL_DEPTH_TEST);
     glClear(GL_DEPTH_BUFFER_BIT);
     
@@ -293,28 +302,29 @@ void drawScene() {
     glLoadIdentity();
     gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 400.0f);
     glMatrixMode(GL_MODELVIEW);
-    
-    
+
+
     glLoadIdentity();
+    //If using openGL camera, use gluLookAt
    // gluLookAt(0.0, 20.0, 100.0, //eye is at 0,0,100 so that sun is at origin
               //0.0, 0.0, 0.0, //look at origin
               //0.0, 1.0, -0.2); //upwards
     glLoadMatrixf(camera.viewMatrix());
-
-   // glRotatef(90, 1, 0, 0);
-    
+    glScalef(1.0f+zoom, 1.0f+zoom, 1.0f+zoom);
+    glTranslatef(0+side, 0+updown, 0);
   
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-  // render the solar system
-    
 
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHTING);
+    
+    //Rendering solar system
+    //glEnable(GL_DEPTH_TEST);
+ 
     drawPlanets(SolSys);
-    glDisable(GL_LIGHTING);
+    //glDisable(GL_LIGHTING);
     
 
+    //FOR DEBUGGING
 //    glPushMatrix();
 //    glTranslatef(0.0f, 0.0f, 0.0f);
 //    glPushMatrix();
@@ -337,42 +347,35 @@ void drawScene() {
 //    glTranslatef(-49.6, 0.0f, 0.0f);
 //    glRotatef(_angle, 0, 1, 0);
 //    gluSphere(sphere, 3.96, 20,20);
+    
     glutSwapBuffers();
     
 }
+
+//Updating planet position every timestep
 void stepSystem()
 {
-    ///TODO The stepsize should change according to commandline arguments
-    
-    //if using RK45 then stepsize should change according to the timestepper's timestep
+
     if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
-//        
-//        cout << "Position of First planet is now: " << SolSys->getState()[1][0] << " " <<SolSys->getState()[1][1]<< " " <<endl;
-//        cout << "Position of Second planet is now: " << SolSys->getState()[2][0] << " " <<SolSys->getState()[2][1]<< " " <<endl;
-//        cout << "Position of Third planet is now: " << SolSys->getState()[3][0] << " " <<SolSys->getState()[3][1]<< " " <<endl;
     }
     
 }
 
+//Update function, calling stepsystem every 20ms and updating planet's self rotation
 void update(int value) {
     _angle += 1.5f;
-    
     if (_angle > 360) {
-        
         _angle -= 360;
         
     }
-    
-    
     stepSystem();
-
     glutPostRedisplay();
-    
     glutTimerFunc(20, update, 0);
-    
 }
 
+
+//Mouse drag function for orientation
 void motionFunc(int x, int y)
 {
     camera.MouseDrag(x, y);
@@ -380,13 +383,11 @@ void motionFunc(int x, int y)
     glutPostRedisplay();
 }
 
-
+//Mouse click function
 void mouseFunc(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
     {
-     //   g_mousePressed = true;
-        
         switch (button)
         {
             case GLUT_LEFT_BUTTON:
@@ -404,15 +405,47 @@ void mouseFunc(int button, int state, int x, int y)
     else
     {
         camera.MouseRelease(x, y);
-     //   g_mousePressed = false;
     }
     glutPostRedisplay();
 }
 
+//Keyboard key function
+void keyboardFunc(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+        case 27: // Escape key
+            exit(0);
+            break;
+        case 'i':
+            zoom+=0.2;
+            break;
+        case 'o':
+            zoom-=0.2;
+            break;
+        case 'w':
+            updown+=0.2;
+            break;
+        case 's':
+            updown-=0.2;
+            break;
+        case 'a':
+            side+=0.2;
+            break;
+        case 'd':
+            side -=0.2;
+            break;
+        default:
+            break;
+    }
+    glutPostRedisplay();
+ 
+}
+
+//Main function
 int main(int argc, char * argv[]) {
     glutInit(&argc, argv);
     
-
     char* dataFile = nullptr;
     for (int argNum=1;argNum<argc; ++argNum){
         
@@ -428,28 +461,24 @@ int main(int argc, char * argv[]) {
         }
         
     }
-    
-    //SolarSystem solSys;
+
     initialize(dataFile);
  
     
-    
+    //Setting up window
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(1280, 1024);
     camera.SetDimensions(1280, 1024);
     camera.SetDistance(80);
-    camera.SetCenter(Vector3f::ZERO);
+    camera.SetCenter(Vector3f(0,0,0));
     glutCreateWindow("Solar System");
     initRendering();
     glutMouseFunc(mouseFunc);
     glutMotionFunc(motionFunc);
-
+    glutKeyboardFunc(keyboardFunc);
     glutDisplayFunc(drawScene);
     glutReshapeFunc(handleResize);
     glutTimerFunc(20, update, 0);
     glutMainLoop();
-
-    
-    
 
 }
