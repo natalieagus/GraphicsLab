@@ -43,6 +43,56 @@ void initialize(char* dataFile){
     stepSize = 365.f;
     
 }
+
+GLuint LoadTexture( const char * filename )
+{
+    
+    GLuint texture;
+    
+    int width, height;
+    
+    unsigned char * data;
+    
+    FILE * file;
+    
+    file = fopen( filename, "rb" );
+    
+    if ( file == NULL ) return 0;
+    width = 1024;
+    height = 512;
+    data = (unsigned char *)malloc( width * height * 3 );
+    //int size = fseek(file,);
+    fread( data, width * height * 3, 1, file );
+    fclose( file );
+    
+    for(int i = 0; i < width * height ; ++i)
+    {
+        int index = i*3;
+        unsigned char B,R;
+        B = data[index];
+        R = data[index+2];
+        
+        data[index] = R;
+        data[index+2] = B;
+        
+    }
+    
+    
+    glGenTextures( 1, &texture );
+    glBindTexture( GL_TEXTURE_2D, texture );
+    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST );
+    
+    
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_REPEAT );
+    gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,GL_RGB, GL_UNSIGNED_BYTE, data );
+    free( data );
+    
+    return texture;
+}
+
 void initRendering() {
     glEnable(GL_DEPTH_TEST);
 
@@ -73,14 +123,14 @@ void initRendering() {
     glEnable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
     
-    
     //Texture Loading
     glShadeModel(GL_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);
     glDisable(GL_CULL_FACE);
     glEnable(GL_TEXTURE_2D);
-    Image* img = Image::loadBMP("Startup_screen.bmp");
-    texId = Image::loadTextureFromImage(img);
+    glBindTexture(GL_TEXTURE_2D, texId);
+    Image* img = Image::loadBMP("asteroid.bmp");
+    texId = Image::loadTexture(img);
     delete img;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -157,44 +207,43 @@ void drawPlanets(SolarSystem* solsys){
 //called every  time
 void drawScene() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  //  glBindTexture(GL_TEXTURE_2D, texId);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 400.0f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0, 135.0, 0.0, //eye is at 0,0,100 so that sun is at origin
+    gluLookAt(0.0, 0.0, 60.0, //eye is at 0,0,100 so that sun is at origin
               0.0, 0.0, 0.0, //look at origin
-              0.0, 0.0, -1.0); //upwards
+              0.0, 1.0, 0.0); //upwards
     
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
   // render the solar system
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-    drawPlanets(SolSys);
+   // drawPlanets(SolSys);
     glDisable(GL_LIGHTING);
     
 
-//    glPushMatrix();
-//    glTranslatef(0.0f, 0.0f, 0.0f);
-//    glPushMatrix();
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 8.45, 20, 20);
-//    glPopMatrix();
-//    glPopMatrix();
-//    
-//////
-//   // glLoadIdentity();
-//    glPushMatrix();
-//    glTranslatef(-97.47, 0.0f, 0.0f);
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 1, 20,20);
-//   // glutSwapBuffers();
-//    glPopMatrix();
-//    glPopMatrix();
-//    
+    glPushMatrix();
+    glTranslatef(0.0f, 0.0f, 0.0f);
+    glPushMatrix();
+    glRotatef(_angle, 0, 1, 0);
+    gluSphere(sphere, 8.45, 20, 20);
+    glPopMatrix();
+    glPopMatrix();
+    
+////
+   // glLoadIdentity();
+    glPushMatrix();
+    glTranslatef(-97.47, 0.0f, 0.0f);
+    glRotatef(_angle, 0, 1, 0);
+    gluSphere(sphere, 1, 20,20);
+   // glutSwapBuffers();
+    glPopMatrix();
+    glPopMatrix();
+    
 //    glPushMatrix();
 //    glTranslatef(-49.6, 0.0f, 0.0f);
 //    glRotatef(_angle, 0, 1, 0);
