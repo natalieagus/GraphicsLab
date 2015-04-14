@@ -31,6 +31,7 @@ using namespace std;
 //Solar system set up variables
 int screenWidth, screenHeight;
 SolarSystem* SolSys;
+AsteroidSystem* AstSys;
 TimeStepper* timestepper;
 float stepSize;
 
@@ -52,7 +53,7 @@ void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
     
     //initialise AsteroidSystem
-    astSys = new AsteroidSystem(*SolSys);
+    AstSys = new AsteroidSystem(*SolSys);
     
     timestepper = new RK4();
     stepSize = 3.f;
