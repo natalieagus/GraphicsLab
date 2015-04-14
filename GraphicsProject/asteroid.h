@@ -15,7 +15,7 @@ class Asteroid{
     
 public:
     
-    Asteroid(double r, double m, char* obj_filePath);
+    Asteroid();
     double getRadius();
     double getMass();
     

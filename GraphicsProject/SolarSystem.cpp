@@ -36,7 +36,7 @@ SolarSystem::SolarSystem(char* filePath){
     //read and parse file
     
     vector<Vector3f> pos;
-    vector<double> all_dist;
+    vector<double> all_rad;
     cout<<"filePath: "<<filePath<<endl;
     
     FILE *fp = fopen(filePath,"r");
@@ -68,21 +68,16 @@ SolarSystem::SolarSystem(char* filePath){
             cout <<"Planet tex file is: "<<p.getTexFile()<< endl;
             float rdm = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/2));
             pos.push_back(Vector3f(p.getDist()*cos(rdm*M_PI),0,p.getDist()*sin(rdm*M_PI)));
-            all_dist.push_back(p.getDist());
+            all_rad.push_back(p.getRadius());
             
             
         }
     }
     this->sysSize = planets.size();
-    this->min_dist = 1150;
-    //this->min_dist = *min_element(all_dist.begin(), all_dist.end());
-//    
-//    for(int n=0;n<sysSize;n++){
-//        
-//        planets[n].setDist(pow(planets[n].getDist()/min_dist,1.0/3));
-//        planets[n].setRadius(pow(planets[n].getRadius()/min_dist,1.0/3));
-//    }
+    //this->min_dist = 1150;
+    this->min_dist = *min_element(all_rad.begin(), all_rad.end());
     
+    cout<<"min dist: "<<this->min_dist<<endl;
     //initialise Solar System here
     this->state = pos;
     cout << "state size is "<<state.size()<<endl;
@@ -97,90 +92,6 @@ void SolarSystem::draw(){
     
 };
 
-//vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
-//    
-//    vector<Vector3f> acc;
-//    
-//    vector<Vector3f> pos;
-//    
-//    for (int i = 0; i<ceil(state.size()/2) ; i++){
-//        //printf("dist: %f",state[i][0]);
-//        pos.push_back(state[i]);
-//    }
-//    
-//    vector<Vector3f> vel;
-//    for (int i = ceil (state.size()/2); i< state.size(); i++){
-//        vel.push_back(state[i]);
-//    }
-//  
-//    for(int i=0; i<this->sysSize;i++){
-//        
-//        Vector3f a = Vector3f(0,0,0);
-//        
-//        Vector3f loc_i = pos[i];
-//        
-//        for(int j=0; j<this->sysSize;j++){
-//            
-//            if (i==j){
-//                continue;
-//            }
-//            else{
-//                
-//                //calculate accel vector here
-//                float m = planets[j].getMass();
-//                
-//                Vector3f dist = pos[j] - loc_i;
-//                
-//                double k = ((double)GRAV_C * m) /pow(dist.abs(),3);
-//                
-//                a = a + (k * dist);     //sum up for all planets
-//                
-//                
-//            }
-//            
-//        }
-//        
-//        acc.push_back(a/planets[i].getMass());
-//        
-//        
-//    }
-//    
-//    for (int k = 0; k<acc.size(); k++){
-//        vel.push_back(acc[k]);
-//    }
-//    return vel;
-//}
-
-//vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
-//    
-//    vector<Vector3f> vel;
-//    vel.push_back(Vector3f(0,0,0)); //sun always 0
-//    for(int i=1; i<sysSize;i++){
-//        
-//        Vector3f pos = state[i],v;
-//        
-//        //adjust for negative 0 because using double
-//        if(pos.x()==0){
-//
-//            v = Vector3f(pos.z(),pos.y(),pos.x());
-//        }
-//        else{
-//            v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
-//                       }
-//        
-//        //vel.push_back(vel_factor[i]*v.normalized());
-//        vel.push_back(v);
-////        if(i==0){
-////            
-////            //cout<<"Sun: "<<v[0]<<" "<<v[1]<<" "<<v[2]<<" ";
-////            //cout<<endl;
-////        }
-//        
-//    }
-//    
-//    
-//    return vel;
-//}
 
 vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
     
@@ -211,7 +122,9 @@ vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
                 
                 //calculate v
                 
-                double dist = abs(planets[j].getDist() - planets[i].getDist())*1000;
+                //double dist = abs(planets[j].getDist() - planets[i].getDist())*1000;
+                
+                double dist = (state[j]-state[i]).abs();
                 
                 sum+=(planets[j].getMass()* (double) m_E /dist);
                 

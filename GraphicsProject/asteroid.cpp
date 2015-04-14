@@ -7,12 +7,19 @@
 //
 
 #include "asteroid.h"
+#include <random>
+
+#define DENS 2000.0
     
-Asteroid::Asteroid(double r, double m, char* obj_filePath){
+Asteroid::Asteroid(){
     
-    this->r = r;
-    this->m = m;
-    this->obj_filePath = obj_filePath;
+    double rand_r = (float) rand()/RAND_MAX *5;
+    //double rand_m = (float) rand()/RAND_MAX;
+    
+    this->r = rand_r*1000.0;
+    double vol = pow(this->r,3)*M_PI * (4.0/3.0);
+    this->m = vol*DENS;
+    this->obj_filePath = "something";
     
 };
 double Asteroid::getRadius(){

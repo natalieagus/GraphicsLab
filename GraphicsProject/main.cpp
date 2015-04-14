@@ -23,6 +23,7 @@
 #include "math.h"
 #include "TimeStepper.hpp"
 #include "camera.h"
+#include "asteroidSystem.h"
 
 
 using namespace std;
@@ -49,8 +50,12 @@ GLuint bgId;
 //Initializing solar system
 void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
+    
+    //initialise AsteroidSystem
+    astSys = new AsteroidSystem(*SolSys);
+    
     timestepper = new RK4();
-    stepSize = 365.f;
+    stepSize = 3.f;
 }
 
 //Initializing rendering (lights, and texture loading)

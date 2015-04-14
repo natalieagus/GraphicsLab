@@ -13,13 +13,14 @@
 #include "asteroid.h"
 #include "vecmath.h"
 #include <vector>
+#include "SolarSystem.h"
 
 using namespace std;
 
 class AsteroidSystem{
     public:
-        AsteroidSystem();
-    void addAsteroid(Asteroid ast);
+        AsteroidSystem(SolarSystem solSys);
+    void addAsteroid(Vector3f pos);
     void delAsteroid(Asteroid ast);
     void draw();
     void toString();
@@ -31,6 +32,7 @@ class AsteroidSystem{
     vector<Vector3f> getState();
     vector<Vector3f> evalF(vector<Vector3f> currentState);
     void setState(vector<Vector3f> nextState, vector<Vector3f> currentState);
+    SolarSystem solSys;
 
     private:
     
