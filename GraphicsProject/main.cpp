@@ -24,7 +24,7 @@
 #include "TimeStepper.hpp"
 #include "camera.h"
 #include "asteroidSystem.h"
-
+#include "asteroid.h"
 
 using namespace std;
 
@@ -54,7 +54,7 @@ void initialize(char* dataFile){
     
     //initialise AsteroidSystem
     AstSys = new AsteroidSystem(*SolSys);
-    
+    AstSys->sysSize = 0;
     timestepper = new RK4();
     stepSize = 3.f;
 }
@@ -98,76 +98,6 @@ void initRendering() {
     delete imgBG;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-//    Image* img = Image::loadBMP("sun.bmp");
-//    GLuint td = Image::loadTexture(img);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td);
-//    delete img;
-//    
-//    Image* img2 = Image::loadBMP("mercury.bmp");
-//    GLuint td2 = Image::loadTexture(img2);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td2);
-//    delete img2;
-//    
-//    Image* img3 = Image::loadBMP("venus.bmp");
-//    GLuint td3 = Image::loadTexture(img3);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td3);
-//    delete img3;
-//    
-//    Image* img4 = Image::loadBMP("earth.bmp");
-//    GLuint td4 = Image::loadTexture(img4);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td4);
-//    delete img4;
-//    
-//    Image* img5 = Image::loadBMP("mars.bmp");
-//    GLuint td5 = Image::loadTexture(img5);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td5);
-//    delete img5;
-//    
-//    Image* img6 = Image::loadBMP("jupiter.bmp");
-//    GLuint td6 = Image::loadTexture(img6);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td6);
-//    delete img6;
-//    
-//    Image* img7 = Image::loadBMP("saturn.bmp");
-//    GLuint td7 = Image::loadTexture(img7);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td7);
-//    delete img7;
-//    
-//    Image* img8 = Image::loadBMP("uranus.bmp");
-//    GLuint td8 = Image::loadTexture(img8);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td8);
-//    delete img8;
-//    
-//    Image* img9 = Image::loadBMP("neptune.bmp");
-//    GLuint td9 = Image::loadTexture(img9);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td9);
-//    delete img9;
-//    
-//    Image* img10 = Image::loadBMP("pluto.bmp");
-//    GLuint td10 = Image::loadTexture(img10);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    texIds.push_back(td10);
-//    delete img10;
     
     SolSys->setTextures();
     texIds = SolSys->textures;
@@ -246,6 +176,28 @@ void drawPlanets(SolarSystem* solsys){
     }
 }
 
+void drawAsteroids(AsteroidSystem* asteroidSystem){
+    double minDist = SolSys->min_dist;
+    for (int i = 0; i<asteroidSystem->sysSize; i++){
+        vector<Asteroid> asts = asteroidSystem->asteroids;
+        vector<Vector3f> states = asteroidSystem->state;
+        glPushMatrix();
+        Asteroid a = asts[i];
+        double scale = pow(states[i].abs()/minDist,1.0/3.0);
+        Vector3f pos = scale*states[i].normalized();
+    //    cout << "Asteroid " << i << " pos x " << pos[0] << " pos y "<< pos[1]<< " pos z" <<pos[2]<<endl;
+        glTranslatef(pos[0], pos[1], pos[2]);
+        glEnable(GL_COLOR);
+        glColor3f(1 , 0, 0);
+        double rad = pow(asts[i].getRadius()/minDist, 1.0/3.0);
+       // cout <<"Radius is: "<<rad<<endl;
+        gluSphere(sphere, rad, 20, 20);
+        glDisable(GL_COLOR);
+        glPopMatrix();
+        glPopMatrix();
+        glPopMatrix();
+    }
+}
 //Background cube for rendering stars
 void drawCube(void)
 {
@@ -308,16 +260,18 @@ void drawScene() {
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 400.0f);
+    gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 500.0f);
     glMatrixMode(GL_MODELVIEW);
 
 
     glLoadIdentity();
     //If using openGL camera, use gluLookAt
-   // gluLookAt(0.0, 20.0, 100.0, //eye is at 0,0,100 so that sun is at origin
-              //0.0, 0.0, 0.0, //look at origin
-              //0.0, 1.0, -0.2); //upwards
-    glLoadMatrixf(camera.viewMatrix());
+  //  gluLookAt(40.0, 0.0, 80.0, //eye is at 0,0,100 so that sun is at origin
+    //          0.0, 0.0, 0.0, //look at origin
+      //        0.0, 1.0, 0.0); //upwards
+   glLoadMatrixf(camera.viewMatrix());
+    
+   // gluLookAt(0, 0, 100, 0, 20, 0, 0, 1, 0);
     glScalef(1.0f+zoom, 1.0f+zoom, 1.0f+zoom);
     glTranslatef(0+side, 0+updown, 0);
   
@@ -329,6 +283,7 @@ void drawScene() {
     //glEnable(GL_DEPTH_TEST);
  
     drawPlanets(SolSys);
+    drawAsteroids(AstSys);
     //glDisable(GL_LIGHTING);
     
 
@@ -366,6 +321,7 @@ void stepSystem()
 
     if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
+       // timestepper->takeStepAsteroid(AstSys, stepSize/1000);
     }
     
 }
@@ -394,6 +350,10 @@ void motionFunc(int x, int y)
 //Mouse click function
 void mouseFunc(int button, int state, int x, int y)
 {
+    
+    float xcoord = float(x)/(float)1280 * (float) 1400000000 -( float)700000000;
+    float ycoord = (1024-float(y))/(float)1024 * (float) 1400000000 -( float)700000000;
+    
     if (state == GLUT_DOWN)
     {
         switch (button)
@@ -404,8 +364,14 @@ void mouseFunc(int button, int state, int x, int y)
 //            case GLUT_MIDDLE_BUTTON:
 //                camera.MouseClick(Camera::MIDDLE, x, y);
 //                break;
-//            case GLUT_RIGHT_BUTTON:
-//                camera.MouseClick(Camera::RIGHT, x, y);
+            case GLUT_RIGHT_BUTTON:
+               // camera.MouseClick(Camera::RIGHT, x, y);
+                //range is -700000000 to 700000000 on all axes
+
+                AstSys->addAsteroid(Vector3f(xcoord ,ycoord,7000000));
+                cout<<"X is: "<< x << "Y is: " << y << endl;
+                cout <<"new x is: "<<xcoord << "new y is" <<ycoord<<endl;
+                break;
             default:
                 break;
         }
@@ -478,7 +444,9 @@ int main(int argc, char * argv[]) {
     glutInitWindowSize(1280, 1024);
     camera.SetDimensions(1280, 1024);
     camera.SetDistance(80);
-    camera.SetCenter(Vector3f(0,0,0));
+   // camera.SetCenter(Vector3f(100, 0, 0));
+    camera.SetCenter(Vector3f(0,0,0)); //this is the camera center, change this to location of planet
+    
     glutCreateWindow("Solar System");
     initRendering();
     glutMouseFunc(mouseFunc);

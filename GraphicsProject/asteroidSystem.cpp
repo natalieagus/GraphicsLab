@@ -102,6 +102,13 @@ vector<Vector3f> AsteroidSystem::evalF(vector<Vector3f> currentState){
     
     return vel;
 };
-void setState(vector<Vector3f> nextState, vector<Vector3f> currentState){
+
+vector<Vector3f> AsteroidSystem::getState(){
+    return state;
+}
+
+void AsteroidSystem::setState(vector<Vector3f> nextState, vector<Vector3f> currentState){
+    state = nextState;
+    oldstate = currentState;
     
 };
