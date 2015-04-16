@@ -22,9 +22,7 @@ void AsteroidSystem::addAsteroid(Vector3f pos){
     this->asteroids.push_back(Asteroid());
     
     //scale pos
-    
-    double scale = pow(pos.abs() * solSys.min_dist,3.0);
-    this->state.push_back(scale*(pos.normalized()));
+    this->state.push_back(pos);
     sysSize++;
 };
 void AsteroidSystem::delAsteroid(Asteroid ast){
@@ -61,6 +59,8 @@ vector<Vector3f> AsteroidSystem::evalF(vector<Vector3f> currentState){
             v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
         }
         
+        
+        
         double sum=0.0;
         
         for(int j=0; j<solSys.sysSize;j++){     //loop thru all planet
@@ -75,25 +75,25 @@ vector<Vector3f> AsteroidSystem::evalF(vector<Vector3f> currentState){
             
         }
         
-        for(int j=0; j<solSys.sysSize;j++){     //loop thru all asteroid
-            
-            
-            if (i==j){
-                continue;
-            }
-            else{
-                
-                //calculate v
-                
-                //double dist = abs(planets[j].getDist()*1000 - asteroids[i].getDist());
-                
-                double dist = (currentState[j] - currentState[i]).abs();
-                
-                sum+=(asteroids[j].getMass()* (double) m_E /dist);
-                
-            }
-            
-        }
+//        for(int k=0; k<sysSize;k++){     //loop thru all asteroid
+//            
+//            
+//            if (i==k){
+//                continue;
+//            }
+//            else{
+//                
+//                //calculate v
+//                
+//                //double dist = abs(planets[j].getDist()*1000 - asteroids[i].getDist());
+//                
+//                double dist = (currentState[k] - currentState[i]).abs();
+//                
+//                sum+=(asteroids[k].getMass()* (double) m_E /dist);
+//                
+//            }
+//            
+//        }
         
         
         //float k = sqrt(sum*(double)GRAV_C)*SCALE_F;

@@ -178,24 +178,27 @@ void drawPlanets(SolarSystem* solsys){
 
 void drawAsteroids(AsteroidSystem* asteroidSystem){
     double minDist = SolSys->min_dist;
+    vector<Asteroid> asts = asteroidSystem->asteroids;
+    vector<Vector3f> states = asteroidSystem->state;
+    
     for (int i = 0; i<asteroidSystem->sysSize; i++){
-        vector<Asteroid> asts = asteroidSystem->asteroids;
-        vector<Vector3f> states = asteroidSystem->state;
         glPushMatrix();
-        Asteroid a = asts[i];
+   
+        
+        Vector3f pos;
+        vector<double>pos_xyz;
         double scale = pow(states[i].abs()/minDist,1.0/3.0);
-        Vector3f pos = scale*states[i].normalized();
-    //    cout << "Asteroid " << i << " pos x " << pos[0] << " pos y "<< pos[1]<< " pos z" <<pos[2]<<endl;
+        pos = scale*states[i].normalized();
+        cout << " X pos is: " << pos[0]<<" Y pos is: " << pos[1]<< " Z pos is: " << pos[2]<<endl;
+        double rad = pow(asts[i].getRadius()/minDist, 1.0/3.0);
         glTranslatef(pos[0], pos[1], pos[2]);
         glEnable(GL_COLOR);
-        glColor3f(1 , 0, 0);
-        double rad = pow(asts[i].getRadius()/minDist, 1.0/3.0);
-       // cout <<"Radius is: "<<rad<<endl;
+        glColor3f(1, 0, 0);
         gluSphere(sphere, rad, 20, 20);
         glDisable(GL_COLOR);
         glPopMatrix();
         glPopMatrix();
-        glPopMatrix();
+        
     }
 }
 //Background cube for rendering stars
@@ -321,7 +324,7 @@ void stepSystem()
 
     if (timestepper != 0 && SolSys != 0){
         timestepper->takeStep(SolSys, stepSize);
-       // timestepper->takeStepAsteroid(AstSys, stepSize/1000);
+        timestepper->takeStepAsteroid(AstSys, stepSize);
     }
     
 }
@@ -351,8 +354,8 @@ void motionFunc(int x, int y)
 void mouseFunc(int button, int state, int x, int y)
 {
     
-    float xcoord = float(x)/(float)1280 * (float) 1400000000 -( float)700000000;
-    float ycoord = (1024-float(y))/(float)1024 * (float) 1400000000 -( float)700000000;
+    float xcoord = float(x)/(float)1280 * (float) 1000000000 -( float)500000000;
+    float ycoord = (1024-float(y))/(float)1024 * (float) 1000000000 -( float)500000000;
 
     Vector3f coord =  (camera.GetRotation().transposed() * Vector4f(xcoord, ycoord, 7000000,0)).xyz();
     
@@ -371,7 +374,7 @@ void mouseFunc(int button, int state, int x, int y)
                // camera.MouseClick(Camera::RIGHT, x, y);
                 //range is -700000000 to 700000000 on all axes
                 AstSys->addAsteroid(coord);
-                cout<<"X is: "<< x << "Y is: " << y << endl;
+                //cout<<"X is: "<< x << "Y is: " << y << endl;
               
                 break;
             default:
