@@ -230,10 +230,11 @@ Matrix4f Camera::viewMatrix() const
 	Matrix4f lookAt = Matrix4f::lookAt
 	(
 		Vector3f( 0, 0, mCurrentDistance ),
-		Vector3f::ZERO,
+		Vector3f(0,0,0),
 		Vector3f::UP
 	);
     
+    //return lookAt;
 	return lookAt * mCurrentRot * Matrix4f::translation( -mCurrentCenter );
 
 	/*
