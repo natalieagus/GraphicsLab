@@ -13,6 +13,7 @@
 
 #include "ImageLoad.h"
 
+
 using namespace std;
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h) {
