@@ -404,16 +404,16 @@ void keyboardFunc(unsigned char key, int x, int y)
             }
             break;
         case 'w':
-            updown+=0.2;
+            updown+=20;
             break;
         case 's':
-            updown-=0.2;
+            updown-=20;
             break;
         case 'a':
-            side+=0.2;
+            side+=20;
             break;
         case 'd':
-            side -=0.2;
+            side -=20;
             break;
         default:
             break;

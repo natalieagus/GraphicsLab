@@ -20,7 +20,11 @@ AsteroidSystem::AsteroidSystem(SolarSystem solSys){
 };
 void AsteroidSystem::addAsteroid(Vector3f pos){
     this->asteroids.push_back(Asteroid());
-    this->state.push_back(pos);
+    
+    //scale pos
+    
+    double scale = pow(pos.abs() * solSys.min_dist,3.0);
+    this->state.push_back(scale*(pos.normalized()));
     sysSize++;
 };
 void AsteroidSystem::delAsteroid(Asteroid ast){
