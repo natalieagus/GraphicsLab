@@ -189,7 +189,7 @@ void drawAsteroids(AsteroidSystem* asteroidSystem){
         vector<double>pos_xyz;
         double scale = pow(states[i].abs()/minDist,1.0/3.0);
         pos = scale*states[i].normalized();
-        cout << " X pos is: " << pos[0]<<" Y pos is: " << pos[1]<< " Z pos is: " << pos[2]<<endl;
+        //cout << " X pos is: " << pos[0]<<" Y pos is: " << pos[1]<< " Z pos is: " << pos[2]<<endl;
         double rad = pow(asts[i].getRadius()/minDist, 1.0/3.0);
         glTranslatef(pos[0], pos[1], pos[2]);
         glEnable(GL_COLOR);
@@ -354,10 +354,23 @@ void motionFunc(int x, int y)
 void mouseFunc(int button, int state, int x, int y)
 {
     
-    float xcoord = float(x)/(float)1280 * (float) 1000000000 -( float)500000000;
-    float ycoord = (1024-float(y))/(float)1024 * (float) 1000000000 -( float)500000000;
+//    float xcoord = float(x)/(float)1280 * (float) 1000000000 -( float)500000000;
+//    float ycoord = (1024-float(y))/(float)1024 * (float) 1000000000 -( float)500000000;
+    
+    double zcoord = camera.GetDistance()*(1.0/2.0);
+    double xcoord = camera.GetDistance()*(float(x) - 640)/(float)1280;
+    double ycoord = camera.GetDistance()*(512-float(y))/(float)1024;
 
-    Vector3f coord =  (camera.GetRotation().transposed() * Vector4f(xcoord, ycoord, 7000000,0)).xyz();
+    
+    Vector3f coord(xcoord,ycoord,zcoord);
+    double scale = pow(coord.abs(),3) * SolSys->min_dist;
+    coord = scale * coord.normalized();
+    
+    coord =  (camera.GetRotation().transposed() * Vector4f(coord, 1)).xyz();
+
+    cout<<"X: "<<xcoord<<" Y: "<<ycoord<<" Z: "<<zcoord<<endl;
+    cout<<"new coord: ";
+    coord.print();
     
     if (state == GLUT_DOWN)
     {
