@@ -353,9 +353,8 @@ void mouseFunc(int button, int state, int x, int y)
     
     float xcoord = float(x)/(float)1280 * (float) 1400000000 -( float)700000000;
     float ycoord = (1024-float(y))/(float)1024 * (float) 1400000000 -( float)700000000;
-    
-    Vector3f coord =  (camera.GetRotation().transposed() * Vector4f(xcoord, ycoord, 7000000,0)).xyz();
 
+    Vector3f coord =  (camera.GetRotation().transposed() * Vector4f(xcoord, ycoord, 7000000,0)).xyz();
     
     if (state == GLUT_DOWN)
     {
@@ -395,10 +394,14 @@ void keyboardFunc(unsigned char key, int x, int y)
             exit(0);
             break;
         case 'i':
+            if (zoom <= 3.0){
             zoom+=0.2;
+            }
             break;
         case 'o':
+            if (zoom >= 0){
             zoom-=0.2;
+            }
             break;
         case 'w':
             updown+=0.2;
