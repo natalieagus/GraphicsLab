@@ -354,6 +354,9 @@ void mouseFunc(int button, int state, int x, int y)
     float xcoord = float(x)/(float)1280 * (float) 1400000000 -( float)700000000;
     float ycoord = (1024-float(y))/(float)1024 * (float) 1400000000 -( float)700000000;
     
+    Vector3f coord =  (camera.GetRotation().transposed() * Vector4f(xcoord, ycoord, 7000000,0)).xyz();
+
+    
     if (state == GLUT_DOWN)
     {
         switch (button)
@@ -364,13 +367,13 @@ void mouseFunc(int button, int state, int x, int y)
 //            case GLUT_MIDDLE_BUTTON:
 //                camera.MouseClick(Camera::MIDDLE, x, y);
 //                break;
+                break;
             case GLUT_RIGHT_BUTTON:
                // camera.MouseClick(Camera::RIGHT, x, y);
                 //range is -700000000 to 700000000 on all axes
-
-                AstSys->addAsteroid(Vector3f(xcoord ,ycoord,7000000));
+                AstSys->addAsteroid(coord);
                 cout<<"X is: "<< x << "Y is: " << y << endl;
-                cout <<"new x is: "<<xcoord << "new y is" <<ycoord<<endl;
+              
                 break;
             default:
                 break;
