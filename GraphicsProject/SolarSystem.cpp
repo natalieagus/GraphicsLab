@@ -133,7 +133,7 @@ vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
         }
         //float k = sqrt(sum*(double)GRAV_C)*SCALE_F;
         float k = sqrt(sum*(double)GRAV_C);
-        vel.push_back(k*v.normalized());
+        vel.push_back(-1.0*k*v.normalized());
         //vel.push_back(v);
         if(i==0){
             

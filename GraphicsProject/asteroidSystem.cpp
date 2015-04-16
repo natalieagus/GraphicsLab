@@ -75,30 +75,30 @@ vector<Vector3f> AsteroidSystem::evalF(vector<Vector3f> currentState){
             
         }
         
-//        for(int k=0; k<sysSize;k++){     //loop thru all asteroid
-//            
-//            
-//            if (i==k){
-//                continue;
-//            }
-//            else{
-//                
-//                //calculate v
-//                
-//                //double dist = abs(planets[j].getDist()*1000 - asteroids[i].getDist());
-//                
-//                double dist = (currentState[k] - currentState[i]).abs();
-//                
-//                sum+=(asteroids[k].getMass()* (double) m_E /dist);
-//                
-//            }
-//            
-//        }
+        for(int k=0; k<sysSize;k++){     //loop thru all asteroid
+            
+            
+            if (i==k){
+                continue;
+            }
+            else{
+                
+                //calculate v
+                
+                //double dist = abs(planets[j].getDist()*1000 - asteroids[i].getDist());
+                
+                double dist = (currentState[k] - currentState[i]).abs();
+                
+                sum+=(asteroids[k].getMass()/dist);
+                
+            }
+            
+        }
         
         
         //float k = sqrt(sum*(double)GRAV_C)*SCALE_F;
         float k = sqrt(sum*(double)GRAV_C);
-        vel.push_back(k*v.normalized());
+        vel.push_back(-1.0*k*v.normalized());
         //vel.push_back(v);
         
     }
