@@ -46,7 +46,17 @@ GLfloat updown;
 //Texture Ids for texture binding
 vector<GLuint> texIds;
 GLuint bgId;
+GLuint astId;
 
+bool mercury;
+bool venus;
+bool earth;
+bool mars;
+bool jupiter;
+bool saturn;
+bool uranus;
+bool neptune;
+bool pluto;
 
 //Initializing solar system
 void initialize(char* dataFile){
@@ -96,6 +106,12 @@ void initRendering() {
     Image* imgBG = Image::loadBMP("stars.bmp");
     bgId = Image::loadTexture(imgBG);
     delete imgBG;
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    Image* imgBG2 = Image::loadBMP("asteroid.bmp");
+    astId = Image::loadTexture(imgBG);
+    delete imgBG2;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
@@ -180,10 +196,10 @@ void drawAsteroids(AsteroidSystem* asteroidSystem){
     double minDist = SolSys->min_dist;
     vector<Asteroid> asts = asteroidSystem->asteroids;
     vector<Vector3f> states = asteroidSystem->state;
-    
+   // glBindTexture(GL_TEXTURE_2D, astId);
+    glDisable(GL_LIGHTING);
     for (int i = 0; i<asteroidSystem->sysSize; i++){
         glPushMatrix();
-   
         
         Vector3f pos;
         vector<double>pos_xyz;
@@ -200,6 +216,7 @@ void drawAsteroids(AsteroidSystem* asteroidSystem){
         glPopMatrix();
         
     }
+    glEnable(GL_LIGHTING);
 }
 //Background cube for rendering stars
 void drawCube(void)
@@ -250,7 +267,7 @@ void drawScene() {
     glLoadIdentity();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(1,1,1,1,-100,100);
+    glOrtho(-1,1,1,1,-100,100);
     
     glColor3f(1.0f, 1.0f, 1.0f);
     glBindTexture(GL_TEXTURE_2D, bgId);
@@ -258,25 +275,67 @@ void drawScene() {
     
     
     //Setup perspective camera for solar system rendering
-    glEnable(GL_DEPTH_TEST);
-    glClear(GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(100.0, (float)screenWidth / (float)screenHeight, 0.001f, 500.0f);
     glMatrixMode(GL_MODELVIEW);
-
-
     glLoadIdentity();
+
+
     //If using openGL camera, use gluLookAt
-  //  gluLookAt(40.0, 0.0, 80.0, //eye is at 0,0,100 so that sun is at origin
-    //          0.0, 0.0, 0.0, //look at origin
-      //        0.0, 1.0, 0.0); //upwards
-   glLoadMatrixf(camera.viewMatrix());
+
+    if (mercury || venus || mars || earth || jupiter || saturn || neptune || uranus || pluto){
+        
+        int index;
+        if (mercury) {
+            index = 1;
+        }
+        else if (venus) {
+            index = 2;
+        }
+        else if (earth){
+            index = 3;
+        }
+        else if(mars){
+            index = 4;
+        }
+        else if(jupiter){
+            index = 5;
+        }
+        else if(saturn){
+            index = 6;
+        }
+        else if(uranus){
+            index = 7;
+        }
+        else if(neptune){
+            index = 8;
+        }
+        else if(pluto){
+            index = 9;
+        }
+        
+        double scale = pow(SolSys->getState()[index].abs()/SolSys->min_dist,1.0/3.0);
+        Vector3f pos = scale*SolSys->getState()[index].normalized();
+       // double rad = pow(SolSys->planets[index].getRadius()/SolSys->min_dist, 1.0/3.0);
+        gluLookAt(pos[0], pos[1], pos[2], //eye is at 0,0,100 so that sun is at origin
+                  0.0, 0.0, 0.0, //look at origin
+                0.0, 1.0, 0.0); //upwards
+        glScalef(1.1, 1.1, 1.1);
+    }
+    
+    else{
+        glLoadMatrixf(camera.viewMatrix());
+        glScalef(1.0f+zoom, 1.0f+zoom, 1.0f+zoom);
+        glTranslatef(0+side, 0+updown, 0);
+    }
     
    // gluLookAt(0, 0, 100, 0, 20, 0, 0, 1, 0);
-    glScalef(1.0f+zoom, 1.0f+zoom, 1.0f+zoom);
-    glTranslatef(0+side, 0+updown, 0);
+
   
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -391,6 +450,7 @@ void mouseFunc(int button, int state, int x, int y)
 //Keyboard key function
 void keyboardFunc(unsigned char key, int x, int y)
 {
+
     switch (key)
     {
         case 27: // Escape key
@@ -417,6 +477,116 @@ void keyboardFunc(unsigned char key, int x, int y)
             break;
         case 'd':
             side -=20;
+            break;
+        case '1':
+            mercury = true;
+            venus = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '2':
+            venus = true;
+            mercury = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '3':
+            earth = true;
+            mercury = false;
+            venus = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '4':
+            mars = true;
+            mercury = false;
+            venus = false;
+            earth = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '5':
+            jupiter = true;
+            mercury = false;
+            venus = false;
+            earth = false;
+            mars = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '6':
+            saturn = true;
+            mercury = false;
+            venus = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '7':
+            uranus = true;
+            mercury = false;
+            venus = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            neptune = false;
+            pluto = false;
+            break;
+        case '8':
+            neptune = true;
+            mercury = false;
+            venus = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            pluto = false;
+            break;
+        case '9':
+            pluto = true;
+            mercury = false;
+            venus = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            break;
+        case '0':
+            mercury = false;
+            venus = false;
+            earth = false;
+            mars = false;
+            jupiter = false;
+            saturn = false;
+            uranus = false;
+            neptune = false;
+            pluto = false;
             break;
         default:
             break;
@@ -452,9 +622,9 @@ int main(int argc, char * argv[]) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(1280, 1024);
     camera.SetDimensions(1280, 1024);
+    camera.SetCenter(Vector3f(0, 0, 0));
+    //camera.SetCenter(Vector3f(0,0,0)); //this is the camera center, change this to location of planet
     camera.SetDistance(80);
-   // camera.SetCenter(Vector3f(100, 0, 0));
-    camera.SetCenter(Vector3f(0,0,0)); //this is the camera center, change this to location of planet
     
     glutCreateWindow("Solar System");
     initRendering();
