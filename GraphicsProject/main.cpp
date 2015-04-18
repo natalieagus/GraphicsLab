@@ -39,9 +39,11 @@ float stepSize;
 Camera camera;
 GLUquadricObj *sphere = NULL;
 float _angle = 0;
+vector<float> angles;
 GLfloat zoom;
 GLfloat side;
 GLfloat updown;
+int up;
 
 //Texture Ids for texture binding
 vector<GLuint> texIds;
@@ -67,6 +69,10 @@ void initialize(char* dataFile){
     AstSys->sysSize = 0;
     timestepper = new RK4();
     stepSize = 3.f;
+    
+    for (int i = 0; i<SolSys->sysSize; i++){
+        angles.push_back(0.0f);
+    }
 }
 
 //Initializing rendering (lights, and texture loading)
@@ -169,7 +175,7 @@ void drawPlanets(SolarSystem* solsys){
         glTranslatef(pos[0], pos[1], pos[2]);
         
         if(i != 0){ //self rotation
-              glRotatef(_angle, 0, 1, 0);
+              glRotatef(angles[i], 0, 1, 0);
         }
         
         glRotatef(90, 1, 0, 0);//rotate for orientation
@@ -322,7 +328,7 @@ void drawScene() {
         double scale = pow(SolSys->getState()[index].abs()/SolSys->min_dist,1.0/3.0);
         Vector3f pos = scale*SolSys->getState()[index].normalized();
        // double rad = pow(SolSys->planets[index].getRadius()/SolSys->min_dist, 1.0/3.0);
-        gluLookAt(pos[0], pos[1], pos[2], //eye is at 0,0,100 so that sun is at origin
+        gluLookAt(pos[0], pos[1]+up, pos[2], //eye is at 0,0,100 so that sun is at origin
                   0.0, 0.0, 0.0, //look at origin
                 0.0, 1.0, 0.0); //upwards
         glScalef(1.1, 1.1, 1.1);
@@ -390,10 +396,12 @@ void stepSystem()
 
 //Update function, calling stepsystem every 20ms and updating planet's self rotation
 void update(int value) {
-    _angle += 1.5f;
-    if (_angle > 360) {
-        _angle -= 360;
+    for (int i = 0; i<angles.size(); i++){
+        angles[i] += SolSys->planets[i].ang_v;
+    if (angles[i] > 360) {
+        angles[i] -= 360;
         
+    }
     }
     stepSystem();
     glutPostRedisplay();
@@ -469,6 +477,12 @@ void keyboardFunc(unsigned char key, int x, int y)
         case 27: // Escape key
             exit(0);
             break;
+        case 'r':
+            zoom = 0;
+            updown = 0;
+            up = 0;
+            side = 0;
+            break;
         case 'i':
             if (zoom <= 3.0){
             zoom+=0.2;
@@ -481,9 +495,11 @@ void keyboardFunc(unsigned char key, int x, int y)
             break;
         case 'w':
             updown+=20;
+            up +=10;
             break;
         case 's':
             updown-=20;
+            up -= 10;
             break;
         case 'a':
             side+=20;
@@ -492,6 +508,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             side -=20;
             break;
         case '1':
+            up = 0;
             mercury = true;
             venus = false;
             earth = false;
@@ -503,6 +520,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '2':
+            up = 0;
             venus = true;
             mercury = false;
             earth = false;
@@ -514,6 +532,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '3':
+            up = 0;
             earth = true;
             mercury = false;
             venus = false;
@@ -525,6 +544,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '4':
+            up = 0;
             mars = true;
             mercury = false;
             venus = false;
@@ -536,6 +556,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '5':
+            up = 0;
             jupiter = true;
             mercury = false;
             venus = false;
@@ -547,6 +568,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '6':
+            up = 0;
             saturn = true;
             mercury = false;
             venus = false;
@@ -558,6 +580,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '7':
+            up = 0;
             uranus = true;
             mercury = false;
             venus = false;
@@ -569,6 +592,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '8':
+            up = 0;
             neptune = true;
             mercury = false;
             venus = false;
@@ -580,6 +604,11 @@ void keyboardFunc(unsigned char key, int x, int y)
             pluto = false;
             break;
         case '9':
+            up = 0;
+            zoom = 0;
+            updown = 0;
+            up = 0;
+            side = 0;
             pluto = true;
             mercury = false;
             venus = false;
@@ -591,6 +620,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             neptune = false;
             break;
         case '0':
+            up = 0;
             mercury = false;
             venus = false;
             earth = false;

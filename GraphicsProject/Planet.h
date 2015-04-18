@@ -26,7 +26,7 @@ public:
     double getDist();
     double getMass();
     string getTexFile();
-    
+    double ang_v;    //angular velocity, period is 2pi / angular vel
     
     
     void setRadius(double new_r);
@@ -43,7 +43,7 @@ private:
 
     double r;    //radius of Planet
     double m;    //mass of Planet
-    double ang_v;    //angular velocity, period is 2pi / angular vel
+
     double R;    //distance from sun
     string tex_file;
     string name;
