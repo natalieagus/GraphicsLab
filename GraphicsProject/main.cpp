@@ -60,6 +60,8 @@ bool uranus;
 bool neptune;
 bool pluto;
 
+bool on = true;
+
 //Initializing solar system
 void initialize(char* dataFile){
     SolSys = new SolarSystem(dataFile);
@@ -92,7 +94,7 @@ void initRendering() {
     glMaterialfv(GL_FRONT, GL_SHININESS, matShininess);
     glMaterialfv(GL_FRONT, GL_AMBIENT, matAmbience);
     
-    GLfloat lightAmbient[] = { 0.3, 0.3, 0.3, 1.0 };
+    GLfloat lightAmbient[] = { 0.2, 0.2, 0.2, 1.0 };
     GLfloat lightDiffuse[] = { 1.0, 1.0, 1.0, 1.0 };
     GLfloat lightSpecular[] = { 1.0, 1.0, 1.0, 1.0 };
     
@@ -342,7 +344,7 @@ void drawScene() {
     
    // gluLookAt(0, 0, 100, 0, 20, 0, 0, 1, 0);
 
-  
+    
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
@@ -396,6 +398,7 @@ void stepSystem()
 
 //Update function, calling stepsystem every 20ms and updating planet's self rotation
 void update(int value) {
+    if (on){
     for (int i = 0; i<angles.size(); i++){
         angles[i] += SolSys->planets[i].ang_v;
     if (angles[i] > 360) {
@@ -404,6 +407,7 @@ void update(int value) {
     }
     }
     stepSystem();
+    }
     glutPostRedisplay();
     glutTimerFunc(20, update, 0);
 }
@@ -476,6 +480,14 @@ void keyboardFunc(unsigned char key, int x, int y)
     {
         case 27: // Escape key
             exit(0);
+            break;
+        case 'p':
+            if (on){
+                on = false;
+            }
+            else{
+                on = true;
+            }
             break;
         case 'r':
             zoom = 0;
@@ -605,10 +617,6 @@ void keyboardFunc(unsigned char key, int x, int y)
             break;
         case '9':
             up = 0;
-            zoom = 0;
-            updown = 0;
-            up = 0;
-            side = 0;
             pluto = true;
             mercury = false;
             venus = false;
@@ -621,6 +629,10 @@ void keyboardFunc(unsigned char key, int x, int y)
             break;
         case '0':
             up = 0;
+            zoom = 0;
+            updown = 0;
+            up = 0;
+            side = 0;
             mercury = false;
             venus = false;
             earth = false;
