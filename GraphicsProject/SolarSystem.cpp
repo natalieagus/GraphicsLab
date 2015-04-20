@@ -63,11 +63,20 @@ SolarSystem::SolarSystem(char* filePath){
                 tok = strtok (NULL, ",");
             }
             
-            Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]),toks[5]);
+            Planet p(toks[0],atof(toks[1]),atof(toks[2]),atof(toks[3]),atof(toks[4]),toks[5],atof(toks[6]));
             this->planets.push_back(p);
             cout <<"Planet tex file is: "<<p.getTexFile()<< endl;
             float rdm = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/2));
-            pos.push_back(Vector3f(p.getDist()*cos(rdm*M_PI),0,p.getDist()*sin(rdm*M_PI)));
+//            pos.push_back(Vector3f(
+//                                   p.getDist()*cos(rdm*M_PI)*sin(p.getIncl()),
+//                                   p.getDist()*cos(p.getIncl()),
+//                                   p.getDist()*sin(rdm*M_PI))*sin(p.getIncl())
+//                          );
+            pos.push_back(Vector3f(
+                                   p.getDist()*cos(rdm*M_PI),
+                                   0,
+                                   p.getDist()*sin(rdm*M_PI))
+                          );
             all_rad.push_back(p.getRadius());
             
             

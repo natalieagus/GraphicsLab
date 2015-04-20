@@ -280,7 +280,7 @@ void drawScene() {
     glColor3f(1.0f, 1.0f, 1.0f);
     glBindTexture(GL_TEXTURE_2D, bgId);
     drawCube();
-    
+    glPopMatrix();
     
     //Setup perspective camera for solar system rendering
         glEnable(GL_DEPTH_TEST);
