@@ -22,7 +22,7 @@ Planet::Planet(string name, double R, double r, double m, double ang_v, string t
     this->ang_v = ang_v;
     this->name = name;
     this->tex_file = tex_file;
-    this->incl = (incl/180.0) * M_1_PI;
+    this->incl = (incl/180.0) * M_PI;
 }
 
 double Planet::getDist(){

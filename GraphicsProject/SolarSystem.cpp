@@ -67,11 +67,19 @@ SolarSystem::SolarSystem(char* filePath){
             this->planets.push_back(p);
             cout <<"Planet tex file is: "<<p.getTexFile()<< endl;
             float rdm = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/2));
+            
+//            pos.push_back(Vector3f(
+//                                   p.getDist()*cos(rdm*M_PI)*sin(p.getIncl()),
+//                                   p.getDist()*sin(rdm*M_PI)*sin(p.getIncl()),
+//                          p.getDist()*cos(p.getIncl()))
+//                        );
 //            pos.push_back(Vector3f(
 //                                   p.getDist()*cos(rdm*M_PI)*sin(p.getIncl()),
 //                                   p.getDist()*cos(p.getIncl()),
 //                                   p.getDist()*sin(rdm*M_PI))*sin(p.getIncl())
+//                                    
 //                          );
+
             pos.push_back(Vector3f(
                                    p.getDist()*cos(rdm*M_PI),
                                    0,
@@ -109,15 +117,45 @@ vector<Vector3f> SolarSystem::evalF(vector<Vector3f> state){
     for(int i=1; i<sysSize;i++){
         
         Vector3f pos = state[i],v;
+        double incl = planets[i].getIncl();
+        double v_x;
         
         //adjust for negative 0 because using double
         if(pos.x()==0){
             
-            v = Vector3f(pos.z(),pos.y(),pos.x());
+            v = Vector3f(
+                         pos.z(),
+                         pos.y(),
+                         pos.x());
         }
         else{
             v = Vector3f(pos.z(),pos.y(),pos.x()*-1.0);
         }
+        
+        //with inclination
+        
+//        v_x =(pos.y()*sin(incl)*pos.z()*cos(incl));
+//        if (v_x==0.0){
+//            v_x = 0.0;
+//        }
+//        else{
+//            v_x = -1.0*v_x;
+//        }
+//        
+//        if(pos.x()==0){
+//            v = Vector3f(
+//                         v_x,
+//                         pos.y()*cos(incl)*pos.z()*sin(incl),
+//                         pos.x());
+//        }
+//        
+//        else{
+//            v = Vector3f(
+//                         v_x,
+//                         pos.y()*cos(incl)*pos.z()*sin(incl),
+//                         -1.0*pos.x());
+//        }
+
         
         double sum=0.0;
         
