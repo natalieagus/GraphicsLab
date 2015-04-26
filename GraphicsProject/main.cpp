@@ -49,7 +49,7 @@ int up;
 vector<GLuint> texIds;
 GLuint bgId;
 GLuint astId;
-
+int Yoffset;
 bool mercury;
 bool venus;
 bool earth;
@@ -276,6 +276,7 @@ void drawScene() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-1,1,1,1,-100,100);
+    glTranslatef(0.0f, 0.0f, 0.0f);
     
     glColor3f(1.0f, 1.0f, 1.0f);
     glBindTexture(GL_TEXTURE_2D, bgId);
@@ -417,7 +418,7 @@ void update(int value) {
 void motionFunc(int x, int y)
 {
     camera.MouseDrag(x, y);
-    
+
     glutPostRedisplay();
 }
 
