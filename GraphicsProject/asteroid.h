@@ -30,7 +30,6 @@ private:
     
     double r;    //radius of Planet
     double m;
-    char* obj_filePath;
     
 };
 

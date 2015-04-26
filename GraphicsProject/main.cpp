@@ -330,7 +330,6 @@ void drawScene() {
         
         double scale = pow(SolSys->getState()[index].abs()/SolSys->min_dist,1.0/3.0);
         Vector3f pos = scale*SolSys->getState()[index].normalized();
-       // double rad = pow(SolSys->planets[index].getRadius()/SolSys->min_dist, 1.0/3.0);
         gluLookAt(pos[0], pos[1]+up, pos[2], //eye is at 0,0,100 so that sun is at origin
                   0.0, 0.0, 0.0, //look at origin
                 0.0, 1.0, 0.0); //upwards
@@ -343,45 +342,13 @@ void drawScene() {
         glTranslatef(0+side, 0+updown, 0);
     }
     
-   // gluLookAt(0, 0, 100, 0, 20, 0, 0, 1, 0);
-
-    
     GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
-    
     //Rendering solar system
-    //glEnable(GL_DEPTH_TEST);
  
     drawPlanets(SolSys);
     drawAsteroids(AstSys);
-    //glDisable(GL_LIGHTING);
-    
-
-    //FOR DEBUGGING
-//    glPushMatrix();
-//    glTranslatef(0.0f, 0.0f, 0.0f);
-//    glPushMatrix();
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 8.45, 20, 20);
-//    glPopMatrix();
-//    glPopMatrix();
-    
-////
-   // glLoadIdentity();
-//    glPushMatrix();
-//    glTranslatef(-97.47, 0.0f, 0.0f);
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 1, 20,20);
-//   // glutSwapBuffers();
-//    glPopMatrix();
-//    glPopMatrix();
-    
-//    glPushMatrix();
-//    glTranslatef(-49.6, 0.0f, 0.0f);
-//    glRotatef(_angle, 0, 1, 0);
-//    gluSphere(sphere, 3.96, 20,20);
-    
     glutSwapBuffers();
     
 }
@@ -426,9 +393,6 @@ void motionFunc(int x, int y)
 void mouseFunc(int button, int state, int x, int y)
 {
     
-//    float xcoord = float(x)/(float)1280 * (float) 1000000000 -( float)500000000;
-//    float ycoord = (1024-float(y))/(float)1024 * (float) 1000000000 -( float)500000000;
-    
     double zcoord = camera.GetDistance()*(1.0/2.0);
     double xcoord = camera.GetDistance()*(float(x) - 640)/(float)1280;
     double ycoord = camera.GetDistance()*(512-float(y))/(float)1024;
@@ -450,13 +414,8 @@ void mouseFunc(int button, int state, int x, int y)
         {
             case GLUT_LEFT_BUTTON:
                 camera.MouseClick(Camera::LEFT, x, y);
-//                break;
-//            case GLUT_MIDDLE_BUTTON:
-//                camera.MouseClick(Camera::MIDDLE, x, y);
-//                break;
                 break;
             case GLUT_RIGHT_BUTTON:
-               // camera.MouseClick(Camera::RIGHT, x, y);
                 //range is -700000000 to 700000000 on all axes
                 AstSys->addAsteroid(coord);
                 //cout<<"X is: "<< x << "Y is: " << y << endl;

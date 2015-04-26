@@ -15,14 +15,14 @@
 
 using namespace std;
     
-Planet::Planet(string name, double R, double r, double m, double ang_v, string tex_file, double incl){
+Planet::Planet(string name, double R, double r, double m, double ang_v, string tex_file){
     this->r = r;
     this->R = R;
     this->m = m;
     this->ang_v = ang_v;
     this->name = name;
     this->tex_file = tex_file;
-    this->incl = (incl/180.0) * M_PI;
+
 }
 
 double Planet::getDist(){
@@ -47,12 +47,6 @@ void Planet::setRadius(double new_r){
 double Planet::getMass(){
     
     return this->m;
-    
-}
-
-double Planet::getIncl(){
-    
-    return this->incl;
     
 }
 

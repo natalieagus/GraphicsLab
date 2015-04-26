@@ -19,7 +19,6 @@ Asteroid::Asteroid(){
     this->r = rand_r*1000.0;
     double vol = pow(this->r,3)*M_PI * (4.0/3.0);
     this->m = vol*DENS;
-    this->obj_filePath = "something";
     
 };
 double Asteroid::getRadius(){

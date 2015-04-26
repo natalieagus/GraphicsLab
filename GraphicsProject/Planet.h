@@ -21,30 +21,22 @@ class Planet{
 
 public:
     
-    Planet( string name, double R, double r, double m, double ang_v, string tex_file, double incl);
+    Planet( string name, double R, double r, double m, double ang_v, string tex_file);
     double getRadius();
     double getDist();
     double getMass();
-    double getIncl();
     string getTexFile();
     double ang_v;    //angular velocity, period is 2pi / angular vel
     
     
     void setRadius(double new_r);
     void setDist(double new_R);
-    void draw();
     void toString();
-    
-    
-    
-    
-    
     
 private:
 
     double r;    //radius of Planet
     double m;    //mass of Planet
-    double incl; //orbital inclination
     double R;    //distance from sun
     string tex_file;
     string name;

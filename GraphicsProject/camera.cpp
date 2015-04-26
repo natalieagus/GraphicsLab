@@ -237,17 +237,6 @@ Matrix4f Camera::viewMatrix() const
     //return lookAt;
 	return lookAt * mCurrentRot * Matrix4f::translation( -mCurrentCenter );
 
-	/*
-    gluLookAt(0,0,mCurrentDistance,
-              0,0,0,
-              0.0, 1.0, 0.0);
-
-    // rotate object
-    glMultMatrixf(mCurrentRot);
-
-    //translate object to center
-    glTranslatef(-mCurrentCenter[0],-mCurrentCenter[1],-mCurrentCenter[2]);    
-	*/
 }
 
 void Camera::DistanceZoom(int x, int y)
